@@ -17,3 +17,4 @@ filtro/
 └── build.sh            # Script to compile app to .exe via Docker
 
 
+good luck
