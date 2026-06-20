@@ -16,3 +16,4 @@ filtro/
 │   └── processor.py    # Data extraction logic (Pandas)
 └── build.sh            # Script to compile app to .exe via Docker
 
+
