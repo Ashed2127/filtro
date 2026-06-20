@@ -26,7 +26,7 @@ RUN pip install -r requirements.txt
 COPY src/ ./src/
 
 # Build standalone executable using PyInstaller
-RUN pyinstaller --onefile --name "Filtro" src/app.py
+RUN pyinstaller --onefile --name "Filtro" --hidden-import=processor src/app.py
 
 # Move the executable to a known location
 RUN mv dist/Filtro /app/Filtro
