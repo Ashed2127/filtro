@@ -14,7 +14,36 @@ filtro/
 │   ├── __init__.py
 │   ├── app.py          # Main GUI Application (CustomTkinter)
 │   └── processor.py    # Data extraction logic (Pandas)
-└── build.sh            # Script to compile app to .exe via Docker
+└── build.sh            # Script to compile app to standalone executable via Docker
+```
 
+## 🚀 Building the Application
 
-good luck
+To build the standalone executable:
+
+```bash
+./build.sh
+```
+
+This will:
+1. Build a Docker image with Python 3.10 and all dependencies
+2. Use PyInstaller to create a standalone executable
+3. Output the executable to `./dist/Filtro`
+
+## 📋 Requirements
+
+- Docker
+- Bash shell
+
+The application bundles:
+- CustomTkinter (modern GUI framework)
+- Pandas (Excel data processing)
+- OpenPyXL (Excel file support)
+- Pillow (image handling)
+
+## 🎯 Features
+
+- Excel file selection and processing
+- Configurable filtering options (status column, active value)
+- Data preview in the GUI
+- Export to Excel for A5 printing
