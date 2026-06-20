@@ -2,6 +2,10 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
+import sys
+
+# Add src directory to path for imports
+sys.path.insert(0, os.path.dirname(__file__))
 from processor import DataProcessor
 
 
