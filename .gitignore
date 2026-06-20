@@ -40,7 +40,7 @@ Thumbs.db
 *.xlsx
 *.xls
 temp_*.xlsx
-Filtro.exe
+Filtro
 
 # Docker
 *.log
