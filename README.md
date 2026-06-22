@@ -10,16 +10,21 @@ filtro/
 ├── Dockerfile
 ├── README.md
 ├── requirements.txt
+├── Filtro.spec         # PyInstaller spec file for Windows build
+├── build.sh            # Script to compile app to standalone executable via Docker (Linux)
+├── build_windows.bat   # Windows batch build script
+├── build_windows.ps1   # Windows PowerShell build script
 ├── src/
 │   ├── __init__.py
 │   ├── app.py          # Main GUI Application (CustomTkinter)
 │   └── processor.py    # Data extraction logic (Pandas)
-└── build.sh            # Script to compile app to standalone executable via Docker
 ```
 
 ## 🚀 Building the Application
 
-To build the standalone executable:
+### Linux/Ubuntu Build
+
+To build the standalone executable on Linux/Ubuntu:
 
 ```bash
 ./build.sh
@@ -30,10 +35,49 @@ This will:
 2. Use PyInstaller to create a standalone executable
 3. Output the executable to `./dist/Filtro`
 
+### Windows 10 Build
+
+To build the standalone executable on Windows 10, you have two options:
+
+#### Option 1: Using Batch Script (Recommended)
+
+1. Double-click `build_windows.bat` OR run from Command Prompt:
+   ```cmd
+   build_windows.bat
+   ```
+
+#### Option 2: Using PowerShell Script
+
+1. Right-click `build_windows.ps1` and select "Run with PowerShell" OR run from PowerShell:
+   ```powershell
+   .\build_windows.ps1
+   ```
+   
+   *Note: If you get execution policy errors, run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`*
+
+The Windows build will:
+1. Check for Python installation (requires Python 3.10+)
+2. Create a virtual environment
+3. Install PyInstaller and all dependencies
+4. Build the executable using the PyInstaller spec file
+5. Output the executable to `dist\Filtro.exe`
+
+#### Windows Prerequisites
+
+- Python 3.10 or higher from https://www.python.org/downloads/
+- During Python installation, check "Add Python to PATH"
+- Administrator rights (for some systems)
+
 ## 📋 Requirements
 
+### For Linux/Ubuntu Build
 - Docker
 - Bash shell
+
+### For Windows 10 Build
+- Python 3.10 or higher
+- Windows 10 or later
+- Administrator rights (recommended)
 
 The application bundles:
 - CustomTkinter (modern GUI framework)
@@ -47,3 +91,34 @@ The application bundles:
 - Configurable filtering options (status column, active value)
 - Data preview in the GUI
 - Export to Excel for A5 printing
+
+## 🔧 Troubleshooting
+
+### Windows Build Issues
+
+**Python not found:**
+- Ensure Python 3.10+ is installed from https://www.python.org/downloads/
+- During installation, check "Add Python to PATH"
+- Restart Command Prompt/PowerShell after installation
+
+**PowerShell execution policy error:**
+- Run: `Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser`
+
+**Build fails with missing dependencies:**
+- Ensure virtual environment is created successfully
+- Manually install dependencies: `pip install -r requirements.txt`
+
+**Antivirus blocking the executable:**
+- Some antivirus software may flag PyInstaller executables
+- Add exception for the `dist` folder during build
+- The built executable is safe - it's your own application
+
+### Linux Build Issues
+
+**Docker not running:**
+- Start Docker service: `sudo systemctl start docker`
+- Ensure you have proper Docker permissions
+
+**Build fails with container errors:**
+- Clean Docker system: `docker system prune -a`
+- Rebuild the image: `docker build --no-cache -t filtro-builder .`
