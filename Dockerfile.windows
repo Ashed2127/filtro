@@ -25,8 +25,8 @@ RUN Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 & \
     export DISPLAY=:99 && \
     wineboot --init
 
-# Install Visual C++ Redistributable via winetricks
-RUN winetricks -q vcrun2019
+# Skip Visual C++ Redistributable installation due to checksum issues
+# RUN winetricks -q vcrun2019
 
 # Download and install Python 3.10 for Windows
 RUN wget https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe -O /tmp/python-installer.exe && \
