@@ -92,6 +92,44 @@ The application bundles:
 - Data preview in the GUI
 - Export to Excel for A5 printing
 
+## 🔄 Auto-Commit Monitor
+
+The project includes an automatic git commit and push monitor that tracks file changes and automatically commits them to the repository.
+
+### Running the Auto-Commit Monitor
+
+To start the automatic change monitoring:
+
+```bash
+python3 auto_commit.py
+```
+
+The monitor will:
+- Watch the current directory and all subdirectories for file changes
+- Automatically commit changes with the message "Auto-commit: Project changes detected"
+- Push commits to the remote repository immediately
+- Ignore temporary files and directories (.git, __pycache__, .devin, venv, dist, etc.)
+
+**Note**: The monitor requires the `watchdog` library, which is included in requirements.txt.
+
+### Stopping the Monitor
+
+Press `Ctrl+C` to stop the file watcher gracefully.
+
+### Background Operation
+
+To run the monitor in the background:
+
+```bash
+python3 auto_commit.py &
+```
+
+Or using nohup to keep it running after terminal closure:
+
+```bash
+nohup python3 auto_commit.py > auto_commit.log 2>&1 &
+```
+
 ## 🔧 Troubleshooting
 
 ### Windows Build Issues
