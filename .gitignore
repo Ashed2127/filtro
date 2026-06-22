@@ -44,3 +44,6 @@ Filtro
 
 # Docker
 *.log
+
+# Devin
+.devin/

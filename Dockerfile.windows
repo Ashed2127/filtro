@@ -1,12 +1,11 @@
-# Multi-stage Dockerfile for cross-platform Windows .exe build using Wine
-# Stage 1: Build environment with Wine and Python
-FROM ubuntu:22.04 AS builder
+# Dockerfile for cross-platform Windows .exe build using Wine
+FROM ubuntu:22.04
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV WINEPREFIX=/root/.wine
 ENV WINEARCH=win64
 
-# Install Wine and basic dependencies
+# Install Wine and dependencies
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y \
@@ -18,23 +17,31 @@ RUN dpkg --add-architecture i386 && \
     wget \
     curl \
     git \
+    xvfb \
     && rm -rf /var/lib/apt/lists/*
 
-# Initialize Wine and install Python 3.10 via Wine
-RUN winetricks -q vcrun2019 && \
-    wget https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe -O /tmp/python-installer.exe && \
+# Initialize Wine (use xvfb to avoid display issues)
+RUN Xvfb :99 -screen 0 1024x768x24 > /dev/null 2>&1 & \
+    export DISPLAY=:99 && \
+    wineboot --init
+
+# Install Visual C++ Redistributable via winetricks
+RUN winetricks -q vcrun2019
+
+# Download and install Python 3.10 for Windows
+RUN wget https://www.python.org/ftp/python/3.10.11/python-3.10.11-amd64.exe -O /tmp/python-installer.exe && \
     wine64 /tmp/python-installer.exe /passive InstallAllUsers=0 PrependPath=1 Include_test=0 && \
     rm /tmp/python-installer.exe
 
-# Set up Wine Python environment
-ENV WINE_PYTHON="/root/.wine/drive_c/Users/root/AppData/Local/Programs/Python/Python310/python.exe"
-ENV WINE_PIP="/root/.wine/drive_c/Users/root/AppData/Local/Programs/Python/Python310/Scripts/pip.exe"
+# Configure Wine Python paths
+ENV WINE_PYTHON="C:\\\\Users\\\\root\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python310\\\\python.exe"
+ENV WINE_PIP="C:\\\\Users\\\\root\\\\AppData\\\\Local\\\\Programs\\\\Python\\\\Python310\\\\Scripts\\\\pip.exe"
 
-# Upgrade pip and install PyInstaller
-RUN wine64 "$WINE_PIP" install --upgrade pip && \
-    wine64 "$WINE_PIP" install pyinstaller
+# Upgrade pip and install PyInstaller via Wine
+RUN wine64 python -m pip install --upgrade pip && \
+    wine64 python -m pip install pyinstaller
 
-# Create working directory
+# Set working directory
 WORKDIR /app
 
 # Copy project files
@@ -42,8 +49,11 @@ COPY requirements.txt .
 COPY src/ ./src/
 COPY Filtro.spec .
 
-# Install Python dependencies via Wine
-RUN wine64 "$WINE_PIP" install -r requirements.txt
+# Install Python dependencies via Wine Python
+RUN wine64 python -m pip install -r requirements.txt
 
-# Build the Windows executable using the spec file
-RUN wine64 pyinstaller Filtro.spec --clean
+# Build Windows executable using PyInstaller spec
+RUN wine64 pyinstaller Filtro.spec --clean --noconfirm
+
+# Copy the executable to a predictable location
+RUN if [ -f "dist/Filtro.exe" ]; then cp dist/Filtro.exe /app/Filtro.exe; fi
