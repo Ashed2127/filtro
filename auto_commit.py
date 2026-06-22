@@ -3,13 +3,10 @@
 Auto-commit file watcher for git repositories.
 Monitors the current directory for changes and automatically commits and pushes them.
 """
-"""
-Auto-commit file watcher for git repositories.
-Monitors the current directory for changes and automatically commits and pushes them.
-"""
 
 import os
 import subprocess
+import sys
 import time
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
