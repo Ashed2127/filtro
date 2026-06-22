@@ -28,6 +28,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         print(f"Change detected: {event.src_path}")
+        sys.stdout.flush()
         self.schedule_commit()
 
     def on_created(self, event):
@@ -40,6 +41,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         print(f"File created: {event.src_path}")
+        sys.stdout.flush()
         self.schedule_commit()
 
     def on_deleted(self, event):
@@ -52,6 +54,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         print(f"File deleted: {event.src_path}")
+        sys.stdout.flush()
         self.schedule_commit()
 
     def schedule_commit(self):
@@ -78,9 +81,11 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             
             if not result.stdout.strip():
                 print("No changes to commit")
+                sys.stdout.flush()
                 return
             
             print("Committing and pushing changes...")
+            sys.stdout.flush()
             
             # Add all changes
             subprocess.run(['git', 'add', '.'], check=True)
@@ -95,18 +100,23 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             subprocess.run(['git', 'push'], check=True)
             
             print("Changes committed and pushed successfully!")
+            sys.stdout.flush()
             
         except subprocess.CalledProcessError as e:
             print(f"Error during git operation: {e}")
+            sys.stdout.flush()
         except Exception as e:
             print(f"Unexpected error: {e}")
+            sys.stdout.flush()
 
 
 def main():
     """Main function to start the file watcher"""
     repo_path = os.getcwd()
     print(f"Monitoring {repo_path} for changes...")
+    sys.stdout.flush()
     print("Press Ctrl+C to stop the monitor")
+    sys.stdout.flush()
     
     event_handler = GitAutoCommitHandler(repo_path)
     observer = Observer()
@@ -119,6 +129,7 @@ def main():
             time.sleep(1)
     except KeyboardInterrupt:
         print("\nStopping file watcher...")
+        sys.stdout.flush()
         observer.stop()
     
     observer.join()
