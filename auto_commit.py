@@ -23,7 +23,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         # Ignore .git directory and common temporary/build files
-        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info']
+        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info', '.devin', 'venv']
         if any(ignored in event.src_path for ignored in ignored_paths):
             return
         
@@ -36,7 +36,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         # Ignore .git directory and common temporary/build files
-        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info']
+        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info', '.devin', 'venv']
         if any(ignored in event.src_path for ignored in ignored_paths):
             return
         
@@ -49,7 +49,7 @@ class GitAutoCommitHandler(FileSystemEventHandler):
             return
         
         # Ignore .git directory and common temporary/build files
-        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info']
+        ignored_paths = ['.git', '__pycache__', '.pyc', 'dist', '*.egg-info', '.devin', 'venv']
         if any(ignored in event.src_path for ignored in ignored_paths):
             return
         
