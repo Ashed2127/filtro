@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# Auto-commit script for git repositories
 """
 Auto-commit file watcher for git repositories.
 Monitors the current directory for changes and automatically commits and pushes them.
