@@ -17,6 +17,7 @@ a = Analysis(
     ],
     hiddenimports=[
         'customtkinter',
+        'numpy',
         'pandas',
         'openpyxl',
         'pillow',
@@ -27,7 +28,6 @@ a = Analysis(
     runtime_hooks=[],
     excludes=[
         'matplotlib',
-        'numpy',
         'scipy',
         'pytest',
         'setuptools',
@@ -54,7 +54,7 @@ exe = EXE(
     upx=True,
     upx_exclude=[],
     runtime_tmpdir=None,
-    console=False,  # Set to True if you want to see console output
+    console=True,  # Set to True if you want to see console output
     disable_windowed_traceback=False,
     argv_emulation=False,
     target_arch=None,
