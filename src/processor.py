@@ -246,23 +246,36 @@ class DataProcessor:
             
             summary_df = pd.DataFrame(summary_data, columns=['Category', 'Count', 'Total Amount (Birr)'])
             
-            # Combine data and summary
-            with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
-                # Write the main data
-                data.to_excel(writer, sheet_name='Transactions', index=False)
-                
-                # Write the summary to the same sheet, below the data
-                start_row = len(data) + 3  # Leave 2 empty rows for spacing
-                
-                # Write summary with proper formatting
-                summary_df.to_excel(
-                    writer, 
-                    sheet_name='Transactions', 
-                    startrow=start_row, 
-                    startcol=0, 
-                    index=False,
-                    header=True
-                )
+            # Combine data and summary using openpyxl directly
+            from openpyxl import load_workbook
+            from openpyxl.styles import Font
+            
+            # First write the main data
+            data.to_excel(output_path, index=False, engine='openpyxl')
+            
+            # Then load the workbook and add the summary
+            wb = load_workbook(output_path)
+            ws = wb.active
+            
+            # Find the next empty row after the data
+            start_row = len(data) + 4  # Leave 3 empty rows for spacing
+            
+            # Write summary header
+            ws.cell(row=start_row, column=1, value="CATEGORY SUMMARY")
+            ws.cell(row=start_row, column=1).font = Font(bold=True)
+            
+            # Write summary column headers
+            ws.cell(row=start_row + 1, column=1, value="Category")
+            ws.cell(row=start_row + 1, column=2, value="Count")
+            ws.cell(row=start_row + 1, column=3, value="Total Amount (Birr)")
+            
+            # Write summary data
+            for i, (category, count, amount) in enumerate(summary_data):
+                ws.cell(row=start_row + 2 + i, column=1, value=category)
+                ws.cell(row=start_row + 2 + i, column=2, value=count)
+                ws.cell(row=start_row + 2 + i, column=3, value=amount)
+            
+            wb.save(output_path)
             
             return True
         except Exception as e:
