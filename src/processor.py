@@ -75,7 +75,24 @@ class DataProcessor:
         # Clean and format data
         formatted_data = formatted_data.fillna("")
         
+        # Clean payment amounts if in Real Time format
+        if self.is_real_time_format and "Total Payment Amount" in formatted_data.columns:
+            formatted_data["Total Payment Amount"] = formatted_data["Total Payment Amount"].apply(
+                lambda x: self._clean_payment_amount(x)
+            )
+        
         return formatted_data
+    
+    def _clean_payment_amount(self, amount):
+        """Clean payment amount by removing 'Birr' suffix and converting to proper format."""
+        if pd.isna(amount) or amount == "":
+            return ""
+        
+        amount_str = str(amount)
+        # Remove 'Birr' suffix and any whitespace
+        amount_str = amount_str.replace("Birr", "").strip()
+        
+        return amount_str
     
     def get_summary(self) -> Dict:
         """Get summary statistics of the filtered data."""
