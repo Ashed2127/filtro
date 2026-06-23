@@ -88,7 +88,7 @@ class FiltroApp(ctk.CTk):
         )
         self.filter_type_label.pack(anchor="w", padx=10, pady=(10, 5))
         
-        self.filter_type_var = ctk.StringVar(value="standard")
+        self.filter_type_var = ctk.StringVar(value="specific")
         
         self.standard_filter_radio = ctk.CTkRadioButton(
             self.filter_frame,
