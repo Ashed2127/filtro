@@ -392,9 +392,9 @@ class DataProcessor:
         
         # Map Date column
         if "Date" in self.filtered_data.columns:
-            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Date"]).dt.strftime("%d-%m-%Y")
+            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Date"], dayfirst=True).dt.strftime("%d-%m-%Y")
         elif "Sales Date and Time" in self.filtered_data.columns:
-            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Sales Date and Time"]).dt.strftime("%d-%m-%Y")
+            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Sales Date and Time"], dayfirst=True).dt.strftime("%d-%m-%Y")
         else:
             formatted_data["Date"] = ""
         
