@@ -224,11 +224,25 @@ class FiltroApp(ctk.CTk):
                 messagebox.showerror("Error", "Failed to load Excel file.")
                 return
             
+            # Update UI to show detected format
+            if self.processor.is_real_time_format:
+                self.hint_label.configure(text="Detected: Real Time format - Using 'Order Status' = 'Completed'")
+            else:
+                self.hint_label.configure(text="Detected: Standard format - Using custom filter settings")
+            
             # Filter active sales
             self.processor.filter_active_sales(status_column, active_value)
             
-            # Format for printing
-            formatted_data = self.processor.format_for_printing()
+            # Format for printing with suggested columns
+            if self.processor.is_real_time_format:
+                # Suggested columns for Real Time format
+                suggested_columns = [
+                    "Date", "Sales Date and Time", "Customer Name", "Service Number",
+                    "Order No", "Total Payment Amount", "Order Status"
+                ]
+                formatted_data = self.processor.format_for_printing(suggested_columns)
+            else:
+                formatted_data = self.processor.format_for_printing()
             
             # Get summary
             summary = self.processor.get_summary()
@@ -236,7 +250,7 @@ class FiltroApp(ctk.CTk):
             # Display results
             self.display_results(summary, formatted_data)
             
-            messagebox.showinfo("Success", f"Processed {summary['total_items']} active items.")
+            messagebox.showinfo("Success", f"Processed {summary['total_items']} items.")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process data: {str(e)}")
