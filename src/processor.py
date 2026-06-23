@@ -406,11 +406,13 @@ class DataProcessor:
         else:
             formatted_data["User"] = ""
         
-        # Map Reference column
-        if "Service Number" in self.filtered_data.columns:
-            formatted_data["Reference"] = self.filtered_data["Service Number"]
-        elif "Reference" in self.filtered_data.columns:
+        # Map Reference column - try to find a better reference field
+        if "Reference" in self.filtered_data.columns:
             formatted_data["Reference"] = self.filtered_data["Reference"]
+        elif "Ref" in self.filtered_data.columns:
+            formatted_data["Reference"] = self.filtered_data["Ref"]
+        elif "Service Number" in self.filtered_data.columns:
+            formatted_data["Reference"] = self.filtered_data["Service Number"]
         else:
             formatted_data["Reference"] = ""
         
@@ -419,6 +421,8 @@ class DataProcessor:
             formatted_data["Branch"] = self.filtered_data["Branch"]
         elif "Location" in self.filtered_data.columns:
             formatted_data["Branch"] = self.filtered_data["Location"]
+        elif "Site" in self.filtered_data.columns:
+            formatted_data["Branch"] = self.filtered_data["Site"]
         else:
             formatted_data["Branch"] = ""
         
