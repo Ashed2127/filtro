@@ -23,7 +23,8 @@ class FiltroApp(ctk.CTk):
     def setup_window(self):
         """Configure main window properties."""
         self.title("Filtro - Excel Filter & Print Tool")
-        self.geometry("900x700")
+        self.geometry("1000x800")
+        self.minsize(800, 600)
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("blue")
     
@@ -157,8 +158,13 @@ class FiltroApp(ctk.CTk):
         )
         self.results_label.pack(anchor="w", padx=10, pady=(10, 5))
         
-        self.results_text = ctk.CTkTextbox(self.results_frame)
+        self.results_text = ctk.CTkTextbox(self.results_frame, scrollbar_button_color="gray", scrollbar_button_hover_color="darkgray")
         self.results_text.pack(fill="both", expand=True, padx=10, pady=(5, 10))
+        
+        # Enable mouse wheel scrolling
+        self.results_text.bind("<MouseWheel>", self._on_mousewheel)
+        self.results_text.bind("<Button-4>", self._on_mousewheel)
+        self.results_text.bind("<Button-5>", self._on_mousewheel)
     
     def browse_file(self):
         """Open file dialog to select Excel file."""
