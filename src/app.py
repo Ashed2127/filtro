@@ -166,6 +166,13 @@ class FiltroApp(ctk.CTk):
         self.results_text.bind("<Button-4>", self._on_mousewheel)
         self.results_text.bind("<Button-5>", self._on_mousewheel)
     
+    def _on_mousewheel(self, event):
+        """Handle mouse wheel scrolling for the results textbox."""
+        if event.num == 4 or event.delta > 0:
+            self.results_text.yview_scroll(-1, "units")
+        elif event.num == 5 or event.delta < 0:
+            self.results_text.yview_scroll(1, "units")
+    
     def browse_file(self):
         """Open file dialog to select Excel file."""
         file_path = filedialog.askopenfilename(
