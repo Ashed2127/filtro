@@ -200,7 +200,7 @@ class FiltroApp(ctk.CTk):
                 # Suggested columns for Real Time format
                 suggested_columns = [
                     "Date", "Sales Date and Time", "Customer Name", "Service Number",
-                    "Order No", "Total Payment Amount", "Order Status", "Business Operation"
+                    "Order No", "Total Payment Amount", "Order Status", "Business Operation", "Category"
                 ]
                 formatted_data = self.processor.format_for_printing(suggested_columns)
             else:
@@ -209,8 +209,13 @@ class FiltroApp(ctk.CTk):
             # Get summary
             summary = self.processor.get_summary()
             
+            # Get category summary if available
+            category_summary = {}
+            if filter_type == "specific" and self.processor.is_real_time_format:
+                category_summary = self.processor.get_category_summary()
+            
             # Display results
-            self.display_results(summary, formatted_data)
+            self.display_results(summary, formatted_data, category_summary)
             
             messagebox.showinfo("Success", f"Processed {summary['total_items']} items.")
             
