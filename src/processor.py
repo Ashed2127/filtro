@@ -452,7 +452,3 @@ class DataProcessor:
                 report_lines.append(f"Total Amount: {total_amount:.2f}")
         
         return "\n".join(report_lines)
-    
-    def _extract_numeric_amount_series(self, series):
-        """Extract numeric values from a pandas Series of amounts."""
-        return series.apply(lambda x: self._extract_numeric_amount(x)).sum()
