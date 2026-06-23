@@ -80,6 +80,32 @@ class FiltroApp(ctk.CTk):
         self.active_entry.pack(fill="x", padx=10, pady=(5, 10))
         self.active_entry.insert(0, "active")
         
+        # Filter type selection
+        self.filter_type_label = ctk.CTkLabel(
+            self.filter_frame,
+            text="Filter Type:",
+            font=ctk.CTkFont(size=12, weight="bold")
+        )
+        self.filter_type_label.pack(anchor="w", padx=10, pady=(10, 5))
+        
+        self.filter_type_var = ctk.StringVar(value="standard")
+        
+        self.standard_filter_radio = ctk.CTkRadioButton(
+            self.filter_frame,
+            text="Standard (all completed transactions)",
+            variable=self.filter_type_var,
+            value="standard"
+        )
+        self.standard_filter_radio.pack(anchor="w", padx=10, pady=2)
+        
+        self.specific_filter_radio = ctk.CTkRadioButton(
+            self.filter_frame,
+            text="Specific (85/100 Birr + Zero Price Operations)",
+            variable=self.filter_type_var,
+            value="specific"
+        )
+        self.specific_filter_radio.pack(anchor="w", padx=10, pady=(2, 10))
+        
         # Column selection hint
         self.hint_label = ctk.CTkLabel(
             self.filter_frame,
