@@ -40,9 +40,19 @@ class DataProcessor:
         if self.data is None:
             raise ValueError("No data loaded. Call load_excel first.")
         
+        # Use appropriate column name based on file format
+        if self.is_real_time_format:
+            status_column = "Order Status"
+            active_value = "Completed"  # Default for Real Time files
+        
         # Filter for active items (case-insensitive)
-        mask = self.data[status_column].str.lower() == active_value.lower()
-        self.filtered_data = self.data[mask].copy()
+        if status_column in self.data.columns:
+            mask = self.data[status_column].str.lower() == active_value.lower()
+            self.filtered_data = self.data[mask].copy()
+        else:
+            # If column doesn't exist, return all data
+            print(f"Warning: Column '{status_column}' not found. Returning all data.")
+            self.filtered_data = self.data.copy()
         
         return self.filtered_data
     
