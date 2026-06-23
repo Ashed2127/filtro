@@ -428,61 +428,58 @@ class DataProcessor:
         return formatted_data
     
     def generate_business_report(self) -> str:
-        """Generate a compact, professional, print-ready business report.
+        """Generate a business report with the specific table structure and summary format.
         
         Returns a formatted string containing:
-        - Compact transaction details with only essential business columns
+        - Table with columns: ID1, ID2, Transaction, Date, User, Reference, Branch
         - Summary section with category grouping
         - Category counts and amounts
         - Grand total
-        - Clean A4 print-ready formatting
         """
         if self.filtered_data is None:
             return "No filtered data available for report generation."
         
-        # Use business columns for compact display
-        if self.business_columns:
-            report_data = self.filtered_data[self.business_columns].copy()
-        else:
-            report_data = self.filtered_data.copy()
+        # Format data for the specific structure
+        report_data = self.format_for_report()
         
-        # Clean data for display
-        report_data = report_data.fillna("")
-        
-        # Generate transaction details section
+        # Generate the report
         report_lines = []
-        report_lines.append("=" * 50)
-        report_lines.append("FILTERED TRANSACTIONS")
-        report_lines.append("=" * 50)
-        report_lines.append("")
+        
+        # Create table header
+        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 24 + "+" + "-" * 12 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
+        report_lines.append(separator)
         
         # Add column headers
-        headers = "  ".join(str(col)[:15] for col in report_data.columns)
+        headers = "| ID1      | ID2       | Transaction            | Date       | User     | Reference  | Branch     |"
         report_lines.append(headers)
-        report_lines.append("-" * 50)
+        report_lines.append(separator)
         
-        # Add data rows (limit to first 50 for compact display)
-        for idx, row in report_data.head(50).iterrows():
-            row_data = "  ".join(str(val)[:15] for val in row.values)
-            report_lines.append(row_data)
+        # Add data rows
+        for idx, row in report_data.iterrows():
+            id1 = str(row["ID1"])[:10].ljust(10)
+            id2 = str(row["ID2"])[:11].ljust(11)
+            transaction = str(row["Transaction"])[:24].ljust(24)
+            date = str(row["Date"])[:12].ljust(12)
+            user = str(row["User"])[:10].ljust(10)
+            reference = str(row["Reference"])[:12].ljust(12)
+            branch = str(row["Branch"])[:12].ljust(12)
+            
+            row_str = f"| {id1} | {id2} | {transaction} | {date} | {user} | {reference} | {branch} |"
+            report_lines.append(row_str)
         
-        # Add note if more records exist
-        if len(report_data) > 50:
-            report_lines.append(f"... and {len(report_data) - 50} more records")
-        
+        report_lines.append(separator)
         report_lines.append("")
         
         # Generate summary section
-        report_lines.append("=" * 50)
-        report_lines.append("SUMMARY")
-        report_lines.append("=" * 50)
+        report_lines.append("Summary")
+        report_lines.append("-------")
         report_lines.append("")
         
         # Determine category column
         category_col = None
         potential_cat_cols = ['Category', 'category', 'Type', 'type', 'Business Operation', 'business operation']
         for col in potential_cat_cols:
-            if col in report_data.columns:
+            if col in self.filtered_data.columns:
                 category_col = col
                 break
         
@@ -490,17 +487,13 @@ class DataProcessor:
         amount_col = None
         potential_amt_cols = ['Total Payment Amount', 'total payment amount', 'Amount', 'amount', 'Price', 'price']
         for col in potential_amt_cols:
-            if col in report_data.columns:
+            if col in self.filtered_data.columns:
                 amount_col = col
                 break
         
         if category_col and amount_col:
             # Group by category and calculate statistics
-            category_groups = report_data.groupby(category_col)
-            
-            # Format summary table
-            report_lines.append(f"{'Category':<20} {'Count':<10} {'Amount':<15}")
-            report_lines.append("-" * 50)
+            category_groups = self.filtered_data.groupby(category_col)
             
             grand_total = 0
             for category, group in category_groups:
@@ -509,15 +502,16 @@ class DataProcessor:
                     lambda x: self._extract_numeric_amount(x)
                 ).sum()
                 grand_total += total_amount
-                report_lines.append(f"{str(category):<20} {count:<10} {total_amount:>10.2f}")
+                # Format: category name, count, total amount
+                report_lines.append(f"{str(category)[:15]:<15} {count:<10} {total_amount:>10.2f}")
             
-            report_lines.append("-" * 50)
-            report_lines.append(f"{'TOTAL':<20} {'':<10} {grand_total:>10.2f}")
+            report_lines.append("-" * 40)
+            report_lines.append(f"{'total':<15} {'':<10} {grand_total:>10.2f}")
         else:
             # Fallback: basic statistics
             report_lines.append(f"Total Records: {len(report_data)}")
             if amount_col:
-                total_amount = report_data[amount_col].apply(
+                total_amount = self.filtered_data[amount_col].apply(
                     lambda x: self._extract_numeric_amount(x)
                 ).sum()
                 report_lines.append(f"Total Amount: {total_amount:.2f}")
