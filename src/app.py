@@ -232,6 +232,41 @@ class FiltroApp(ctk.CTk):
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process data: {str(e)}")
     
+    def generate_report(self):
+        """Generate a compact business report with transaction details and summary."""
+        if self.processor.filtered_data is None:
+            messagebox.showerror("Error", "Please process data first.")
+            return
+        
+        try:
+            # Generate the business report
+            report = self.processor.generate_business_report()
+            
+            # Display the report in the results textbox
+            self.results_text.delete("1.0", tk.END)
+            self.results_text.insert("1.0", report)
+            
+            # Option to save report to file
+            save_report = messagebox.askyesno(
+                "Save Report",
+                "Report generated successfully! Would you like to save it to a file?"
+            )
+            
+            if save_report:
+                file_path = filedialog.asksaveasfilename(
+                    title="Save Business Report",
+                    defaultextension=".txt",
+                    filetypes=[("Text files", "*.txt"), ("All files", "*.*")]
+                )
+                
+                if file_path:
+                    with open(file_path, 'w') as f:
+                        f.write(report)
+                    messagebox.showinfo("Success", f"Report saved to {file_path}")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to generate report: {str(e)}")
+    
     def display_results(self, summary: dict, data, category_summary: dict = None):
         """Display processed data in the results textbox."""
         self.results_text.delete("1.0", tk.END)
