@@ -282,25 +282,31 @@ class FiltroApp(ctk.CTk):
             messagebox.showerror("Error", f"Failed to generate report: {str(e)}")
     
     def display_results(self, summary: dict, data, category_summary: dict = None):
-        """Display processed data in the results textbox."""
+        """Display processed data in the results textbox using the new format."""
         self.results_text.delete("1.0", tk.END)
         
-        result_text = f"Total Items: {summary['total_items']}\n"
-        result_text += f"Columns: {', '.join(summary['columns'])}\n\n"
-        
-        # Add category summary if available
-        if category_summary and "error" not in category_summary:
-            result_text += "=" * 40 + "\n"
-            result_text += "CATEGORY SUMMARY\n"
-            result_text += "=" * 40 + "\n"
-            for category, info in category_summary.items():
-                result_text += f"{category}: {info['count']} transactions = {info['total_amount']:.2f} Birr\n"
-            result_text += "\n"
-        
-        result_text += "Preview:\n"
-        result_text += data.to_string(max_rows=10)
-        
-        self.results_text.insert("1.0", result_text)
+        # Use the new business report format for display
+        if self.processor.filtered_data is not None:
+            report = self.processor.generate_business_report()
+            self.results_text.insert("1.0", report)
+        else:
+            # Fallback to original format
+            result_text = f"Total Items: {summary['total_items']}\n"
+            result_text += f"Columns: {', '.join(summary['columns'])}\n\n"
+            
+            # Add category summary if available
+            if category_summary and "error" not in category_summary:
+                result_text += "=" * 40 + "\n"
+                result_text += "CATEGORY SUMMARY\n"
+                result_text += "=" * 40 + "\n"
+                for category, info in category_summary.items():
+                    result_text += f"{category}: {info['count']} transactions = {info['total_amount']:.2f} Birr\n"
+                result_text += "\n"
+            
+            result_text += "Preview:\n"
+            result_text += data.to_string(max_rows=10)
+            
+            self.results_text.insert("1.0", result_text)
     
     def print_data(self):
         """Print the processed data to default printer (A5 format)."""
