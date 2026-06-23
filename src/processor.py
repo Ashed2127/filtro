@@ -239,7 +239,7 @@ class DataProcessor:
                         "total_amount": total_amount
                     }
             
-            # Create summary DataFrame
+            # Create summary DataFrame with proper column names
             summary_rows = []
             for category, info in category_summary.items():
                 summary_rows.append({
@@ -250,22 +250,20 @@ class DataProcessor:
             
             summary_df = pd.DataFrame(summary_rows)
             
-            # Add empty rows for spacing
-            empty_row = pd.DataFrame([[""] * len(summary_df.columns)], columns=summary_df.columns)
-            
             # Combine data and summary
             with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
                 # Write the main data
                 data.to_excel(writer, sheet_name='Transactions', index=False)
                 
                 # Write the summary to the same sheet, below the data
-                start_row = len(data) + 3  # Leave 2 empty rows
+                start_row = len(data) + 3  # Leave 2 empty rows for spacing
                 
-                # Write summary header
+                # Write summary with proper formatting
                 summary_df.to_excel(
                     writer, 
                     sheet_name='Transactions', 
                     startrow=start_row, 
+                    startcol=0, 
                     index=False
                 )
             
