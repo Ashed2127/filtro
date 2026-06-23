@@ -198,6 +198,82 @@ class DataProcessor:
             "preview": self.filtered_data.head(5).to_dict()
         }
     
+    def get_category_summary(self) -> Dict:
+        """Get summary statistics by category."""
+        if self.filtered_data is None or "Category" not in self.filtered_data.columns:
+            return {"error": "No categorized data available"}
+        
+        category_summary = {}
+        
+        for category in ['Offer', 'Replacement', 'Transfer', 'Bundle']:
+            cat_data = self.filtered_data[self.filtered_data['Category'] == category]
+            if len(cat_data) > 0:
+                # Calculate total amount for this category
+                total_amount = cat_data['Total Payment Amount'].apply(
+                    lambda x: self._extract_numeric_amount(x)
+                ).sum()
+                
+                category_summary[category] = {
+                    "count": len(cat_data),
+                    "total_amount": total_amount
+                }
+        
+        return category_summary
+    
+    def add_summary_to_excel(self, data: pd.DataFrame, output_path: str) -> bool:
+        """Export data with category summary to Excel file."""
+        try:
+            if data is None:
+                raise ValueError("No data to export")
+            
+            # Calculate category summary
+            category_summary = {}
+            for category in ['Offer', 'Replacement', 'Transfer', 'Bundle']:
+                cat_data = data[data['Category'] == category]
+                if len(cat_data) > 0:
+                    total_amount = cat_data['Total Payment Amount'].apply(
+                        lambda x: self._extract_numeric_amount(x)
+                    ).sum()
+                    category_summary[category] = {
+                        "count": len(cat_data),
+                        "total_amount": total_amount
+                    }
+            
+            # Create summary DataFrame
+            summary_rows = []
+            for category, info in category_summary.items():
+                summary_rows.append({
+                    "Category": category,
+                    "Count": info["count"],
+                    "Total Amount (Birr)": f"{info['total_amount']:.2f}"
+                })
+            
+            summary_df = pd.DataFrame(summary_rows)
+            
+            # Add empty rows for spacing
+            empty_row = pd.DataFrame([[""] * len(summary_df.columns)], columns=summary_df.columns)
+            
+            # Combine data and summary
+            with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
+                # Write the main data
+                data.to_excel(writer, sheet_name='Transactions', index=False)
+                
+                # Write the summary to the same sheet, below the data
+                start_row = len(data) + 3  # Leave 2 empty rows
+                
+                # Write summary header
+                summary_df.to_excel(
+                    writer, 
+                    sheet_name='Transactions', 
+                    startrow=start_row, 
+                    index=False
+                )
+            
+            return True
+        except Exception as e:
+            print(f"Error exporting to Excel with summary: {e}")
+            return False
+    
     def export_to_excel(self, output_path: str, data: Optional[pd.DataFrame] = None) -> bool:
         """Export filtered data to Excel file."""
         try:
