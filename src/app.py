@@ -222,12 +222,22 @@ class FiltroApp(ctk.CTk):
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process data: {str(e)}")
     
-    def display_results(self, summary: dict, data):
+    def display_results(self, summary: dict, data, category_summary: dict = None):
         """Display processed data in the results textbox."""
         self.results_text.delete("1.0", tk.END)
         
-        result_text = f"Total Active Items: {summary['total_items']}\n"
+        result_text = f"Total Items: {summary['total_items']}\n"
         result_text += f"Columns: {', '.join(summary['columns'])}\n\n"
+        
+        # Add category summary if available
+        if category_summary and "error" not in category_summary:
+            result_text += "=" * 40 + "\n"
+            result_text += "CATEGORY SUMMARY\n"
+            result_text += "=" * 40 + "\n"
+            for category, info in category_summary.items():
+                result_text += f"{category}: {info['count']} transactions = {info['total_amount']:.2f} Birr\n"
+            result_text += "\n"
+        
         result_text += "Preview:\n"
         result_text += data.to_string(max_rows=10)
         
