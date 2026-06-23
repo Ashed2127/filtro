@@ -1,5 +1,6 @@
 import pandas as pd
 from typing import List, Dict, Optional
+import os
 
 
 class DataProcessor:
@@ -8,11 +9,25 @@ class DataProcessor:
     def __init__(self):
         self.data: Optional[pd.DataFrame] = None
         self.filtered_data: Optional[pd.DataFrame] = None
+        self.is_real_time_format = False
+    
+    def _is_real_time_file(self, file_path: str) -> bool:
+        """Check if the file is a Real Time Customer Order Payment List Report."""
+        filename = os.path.basename(file_path)
+        return filename.startswith("Real Time")
     
     def load_excel(self, file_path: str) -> bool:
         """Load data from Excel file."""
         try:
-            self.data = pd.read_excel(file_path)
+            self.is_real_time_format = self._is_real_time_file(file_path)
+            
+            if self.is_real_time_format:
+                # Real Time format has header at row 10 (0-indexed)
+                self.data = pd.read_excel(file_path, header=10)
+            else:
+                # Standard format
+                self.data = pd.read_excel(file_path)
+            
             return True
         except Exception as e:
             print(f"Error loading Excel file: {e}")
