@@ -242,7 +242,7 @@ class DataProcessor:
         # Format to appropriate decimal places (no .00 for integers)
         try:
             num_amount = float(amount_str)
-            if num_amount == int(num_amount):
+            if num_amount.is_integer():
                 return str(int(num_amount))
             else:
                 return f"{num_amount:.2f}"
