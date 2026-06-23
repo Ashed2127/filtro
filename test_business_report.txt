@@ -1,0 +1,23 @@
+==================================================
+FILTERED TRANSACTIONS
+==================================================
+
+Date  Ref No  Category  Amount  Customer Name  Status
+--------------------------------------------------
+01/01/2025  INV001  Rep  100  John Doe  Completed
+01/01/2025  INV002  Rep  200  Jane Smith  Completed
+01/01/2025  INV003  Bandi  300  Bob Johnson  Completed
+01/01/2025  INV004  Transfer  85  Alice Brown  Completed
+01/01/2025  INV005  Bandi  400  Charlie Wilson  Completed
+
+==================================================
+SUMMARY
+==================================================
+
+Category             Count      Amount         
+--------------------------------------------------
+Bandi                2              700.00
+Rep                  2              300.00
+Transfer             1               85.00
+--------------------------------------------------
+TOTAL                              1085.00
