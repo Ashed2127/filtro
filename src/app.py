@@ -2,6 +2,7 @@ import customtkinter as ctk
 import tkinter as tk
 from tkinter import filedialog, messagebox
 import os
+import platform
 import pandas as pd
 from typing import List, Dict, Optional
 
