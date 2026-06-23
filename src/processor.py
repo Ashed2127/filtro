@@ -41,6 +41,52 @@ class DataProcessor:
             print(f"Error loading Excel file: {e}")
             return False
     
+    def _detect_business_columns(self):
+        """Automatically identify business-relevant columns from the dataset.
+        
+        Ignores technical fields, metadata, audit fields, empty columns, 
+        duplicate columns, and unnecessary information.
+        """
+        if self.data is None:
+            return
+        
+        # Common business column patterns to look for
+        business_patterns = [
+            'date', 'time', 'customer', 'name', 'amount', 'price', 'cost',
+            'quantity', 'total', 'status', 'category', 'type', 'ref', 'reference',
+            'order', 'invoice', 'number', 'service', 'operation', 'payment'
+        ]
+        
+        # Technical/metadata patterns to ignore
+        ignore_patterns = [
+            'id', 'uuid', 'guid', 'timestamp', 'created', 'updated', 'modified',
+            'audit', 'meta', 'system', 'internal', 'temp', 'flag', 'active'
+        ]
+        
+        self.business_columns = []
+        
+        for column in self.data.columns:
+            col_lower = str(column).lower()
+            
+            # Skip empty columns
+            if self.data[column].isna().all():
+                continue
+            
+            # Skip technical/metadata columns
+            if any(pattern in col_lower for pattern in ignore_patterns):
+                continue
+            
+            # Include columns that match business patterns
+            if any(pattern in col_lower for pattern in business_patterns):
+                self.business_columns.append(column)
+        
+        # If no business columns found, use all non-empty columns
+        if not self.business_columns:
+            self.business_columns = [
+                col for col in self.data.columns 
+                if not self.data[col].isna().all()
+            ]
+    
     def filter_active_sales(self, 
                            status_column: str = "status",
                            active_value: str = "active") -> pd.DataFrame:
