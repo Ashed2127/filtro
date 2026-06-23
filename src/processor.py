@@ -106,11 +106,34 @@ class DataProcessor:
         
         self.filtered_data = filtered_by_status[final_mask].copy()
         
+        # Add categorization
+        self.filtered_data["Category"] = self.filtered_data.apply(self._categorize_transaction, axis=1)
+        
         # Remove the temporary CleanAmount column
         if "CleanAmount" in self.filtered_data.columns:
             del self.filtered_data["CleanAmount"]
         
         return self.filtered_data
+    
+    def _categorize_transaction(self, row) -> str:
+        """Categorize transaction based on business operation and amount."""
+        # Get clean amount
+        amount_str = str(row.get('Total Payment Amount', ''))
+        amount = self._extract_numeric_amount(amount_str)
+        
+        business_op = str(row.get('Business Operation', '')).lower()
+        
+        # Categorization logic
+        if amount == 85.0:
+            return 'Offer'  # 85 birr transactions
+        elif amount == 100.0 and 'change subscriber sim card' in business_op:
+            return 'Replacement'  # 100 birr SIM card changes
+        elif amount == 0.0:
+            return 'Transfer'  # Zero price transactions
+        elif amount == 100.0:
+            return 'Bundle'  # Other 100 birr transactions (potential bundles)
+        
+        return 'Other'
     
     def _extract_numeric_amount(self, amount):
         """Extract numeric value from payment amount string."""
