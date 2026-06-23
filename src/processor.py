@@ -274,15 +274,19 @@ class DataProcessor:
             print(f"Error exporting to Excel with summary: {e}")
             return False
     
-    def export_to_excel(self, output_path: str, data: Optional[pd.DataFrame] = None) -> bool:
+    def export_to_excel(self, output_path: str, data: Optional[pd.DataFrame] = None, with_summary: bool = False) -> bool:
         """Export filtered data to Excel file."""
         try:
             export_data = data if data is not None else self.filtered_data
             if export_data is None:
                 raise ValueError("No data to export")
             
-            export_data.to_excel(output_path, index=False)
-            return True
+            # Use summary export if data has categories and with_summary is True
+            if with_summary and "Category" in export_data.columns:
+                return self.add_summary_to_excel(export_data, output_path)
+            else:
+                export_data.to_excel(output_path, index=False)
+                return True
         except Exception as e:
             print(f"Error exporting to Excel: {e}")
             return False
