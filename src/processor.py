@@ -502,11 +502,11 @@ class DataProcessor:
                     lambda x: self._extract_numeric_amount(x)
                 ).sum()
                 grand_total += total_amount
-                # Format: category name, count, total amount
-                report_lines.append(f"{str(category)[:15]:<15} {count:<10} {total_amount:>10.2f}")
+                # Format: category name (left), count (right), amount (right)
+                report_lines.append(f"{str(category):<15} {count:>6} {total_amount:>10.2f}")
             
-            report_lines.append("-" * 40)
-            report_lines.append(f"{'total':<15} {'':<10} {grand_total:>10.2f}")
+            report_lines.append("-" * 35)
+            report_lines.append(f"{'total':<15} {'':>6} {grand_total:>10.2f}")
         else:
             # Fallback: basic statistics
             report_lines.append(f"Total Records: {len(report_data)}")
