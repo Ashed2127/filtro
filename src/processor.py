@@ -463,7 +463,7 @@ class DataProcessor:
         for idx, row in report_data.head(max_rows).iterrows():
             id1 = str(row["ID1"])[:10].ljust(10)
             id2 = str(row["ID2"])[:11].ljust(11)
-            transaction = str(row["Transaction"])[:24].ljust(24)
+            transaction = str(row["Transaction"])[:22].ljust(22)  # Truncate to 22 chars
             date = str(row["Date"])[:12].ljust(12)
             user = str(row["User"])[:10].ljust(10)
             reference = str(row["Reference"])[:12].ljust(12)
