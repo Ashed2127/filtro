@@ -1,0 +1,79 @@
++----------+-----------+------------------------+------------+----------+------------+------------+
+| ID1      | ID2       | Transaction            | Date       | User     | Reference  | Branch     |
++----------+-----------+------------------------+------------+----------+------------+------------+
+| 992155197. | 30156434668 | Create Subscriber at 85. | 16-06-2026   | MULATU SHI | 992155197.0  |              |
+|            | 30156434160 | Create Customer at 0.00  | 16-06-2026   | MULATU SHI |              |              |
+| 992106957. | 30156434160 | Create Subscriber at 85. | 16-06-2026   | KUDEMA ANG | 992106957.0  |              |
+|            | 30156434160 | Create Customer at 0.00  | 16-06-2026   | KUDEMA ANG |              |              |
+| 992253907. | 30156434160 | Create Subscriber at 85. | 16-06-2026   | ABDI BEKEL | 992253907.0  |              |
+|            | 30156433587 | Create Customer at 0.00  | 16-06-2026   | ABDI BEKEL |              |              |
+| 992174353. | 30156432650 | Create Subscriber at 85. | 16-06-2026   | BIRTUKAN L | 992174353.0  |              |
+|            | 30156432650 | Create Customer at 0.00  | 16-06-2026   | BIRTUKAN L |              |              |
+| 921369877. | 30156432362 | Change Subscriber SIM Ca | 16-06-2026   | GELANE END | 921369877.0  |              |
+| 992256499. | 30156432362 | Create Subscriber at 85. | 16-06-2026   | GALO NEGAS | 992256499.0  |              |
+|            | 30156432221 | Create Customer at 0.00  | 16-06-2026   | GALO NEGAS |              |              |
+| 992247321. | 30156431817 | Create Subscriber at 85. | 16-06-2026   | WENDIMU TA | 992247321.0  |              |
+|            | 30156431710 | Create Customer at 0.00  | 16-06-2026   | WENDIMU TA |              |              |
+| 946741439. | 30156431184 | Change Subscriber SIM Ca | 16-06-2026   | DANIYIEL N | 946741439.0  |              |
+| 992134067. | 30156431074 | Create Subscriber at 85. | 16-06-2026   | Abdurehim  | 992134067.0  |              |
+| 992238706. | 30156430627 | Create Subscriber at 85. | 16-06-2026   | DAME WEDIM | 992238706.0  |              |
+|            | 30156430407 | Create Customer at 0.00  | 16-06-2026   | DAME WEDIM |              |              |
+| 928782647. | 30156430315 | Change Subscriber SIM Ca | 16-06-2026   | tokuma tas | 928782647.0  |              |
+| 955873814. | 30156430213 | Change Subscriber SIM Ca | 16-06-2026   | MARE TEGEG | 955873814.0  |              |
+| 968614860. | 30156430123 | Change Subscriber SIM Ca | 16-06-2026   | MARE TEGEG | 968614860.0  |              |
+| 973533700. | 30156430003 | Change Supplementary Off | 16-06-2026   | Gurmu Abeb | 973533700.0  |              |
+| 992188175. | 30156429896 | Create Subscriber at 85. | 16-06-2026   | EFE MULDET | 992188175.0  |              |
+|            | 30156429832 | Create Customer at 0.00  | 16-06-2026   | EFE MULDET |              |              |
+| 992207553. | 30156429730 | Create Subscriber at 85. | 16-06-2026   | BURUK KEBE | 992207553.0  |              |
+|            | 30156429537 | Create Customer at 0.00  | 16-06-2026   | BURUK KEBE |              |              |
+| 973789881. | 30156429374 | Change Subscriber SIM Ca | 16-06-2026   | ABERA LACH | 973789881.0  |              |
+| 931992827. | 30156426751 | Change Subscriber SIM Ca | 16-06-2026   | GONFA HIRK | 931992827.0  |              |
+| 992070876. | 30156426681 | Create Subscriber at 85. | 16-06-2026   | BIRUT ASFA | 992070876.0  |              |
+|            | 30156426455 | Create Customer at 0.00  | 16-06-2026   | BIRUT ASFA |              |              |
+| 992116470. | 30156426407 | Create Subscriber at 85. | 16-06-2026   | DEREJE SEB | 992116470.0  |              |
+| 940496689. | 30156425858 | Change Subscriber SIM Ca | 16-06-2026   | DAMEE TOLE | 940496689.0  |              |
+| 927249643. | 30156425785 | Change Subscriber SIM Ca | 16-06-2026   | FEYISA MER | 927249643.0  |              |
+| 914641394. | 30156425700 | Change Supplementary Off | 16-06-2026   | KIFLE ACHA | 914641394.0  |              |
+| 992102817. | 30156425700 | Create Subscriber at 85. | 16-06-2026   | KIFLE ACHA | 992102817.0  |              |
+|            | 30156425597 | Create Customer at 0.00  | 16-06-2026   | KIFLE ACHA |              |              |
+| 992067901. | 30156425416 | Create Subscriber at 85. | 16-06-2026   | BEKRI LIKI | 992067901.0  |              |
+|            | 30156425277 | Create Customer at 0.00  | 16-06-2026   | BEKRI LIKI |              |              |
+| 992072767. | 30156424999 | Create Subscriber at 85. | 16-06-2026   | BIKILTU MU | 992072767.0  |              |
+|            | 30156424860 | Create Customer at 0.00  | 16-06-2026   | BIKILTU MU |              |              |
+| 992059413. | 30156424642 | Create Subscriber at 85. | 16-06-2026   | FASIGA TAD | 992059413.0  |              |
+|            | 30156424529 | Create Customer at 0.00  | 16-06-2026   | FASIGA TAD |              |              |
+| 929476965. | 30156424378 | Change Subscriber SIM Ca | 16-06-2026   | terefe bas | 929476965.0  |              |
+| 930241866. | 30156424030 | Change Subscriber SIM Ca | 16-06-2026   | TEREFE BER | 930241866.0  |              |
+| 992079436. | 30156423989 | Create Subscriber at 85. | 16-06-2026   | BONTU KORI | 992079436.0  |              |
+|            | 30156423833 | Create Customer at 0.00  | 16-06-2026   | BONTU KORI |              |              |
+| 900468621. | 30156423639 | Change Subscriber SIM Ca | 16-06-2026   | FIRAOL MOK | 900468621.0  |              |
+| 992082058. | 30156423000 | Create Subscriber at 85. | 16-06-2026   | ARARSA ABA | 992082058.0  |              |
+|            | 30156422903 | Create Customer at 0.00  | 16-06-2026   | ARARSA ABA |              |              |
+| 992102644. | 30156422747 | Create Subscriber at 85. | 16-06-2026   | ABERASH MO | 992102644.0  |              |
+|            | 30156422567 | Create Customer at 0.00  | 16-06-2026   | ABERASH MO |              |              |
+| 992076648. | 30156422453 | Create Subscriber at 85. | 16-06-2026   | DESELEGN A | 992076648.0  |              |
+| 992142173. | 30156422322 | Create Subscriber at 85. | 16-06-2026   | Tesfaye Ke | 992142173.0  |              |
+| 966721992. | 30156422023 | Change Subscriber SIM Ca | 16-06-2026   | fiseha jot | 966721992.0  |              |
+| 938722511. | 30156421932 | Change Subscriber SIM Ca | 16-06-2026   | HANNA RADI | 938722511.0  |              |
+| 992199463. | 30156421881 | Create Subscriber at 85. | 16-06-2026   | SOLOMON TA | 992199463.0  |              |
+| 943092921. | 30156421515 | Change Subscriber SIM Ca | 16-06-2026   | Berecha Ki | 943092921.0  |              |
+| 992193461. | 30156421421 | Create Subscriber at 85. | 16-06-2026   | IFTU NEGES | 992193461.0  |              |
+| 992207146. | 30156421421 | Create Subscriber at 85. | 16-06-2026   | IFTU NEGES | 992207146.0  |              |
+|            | 30156421276 | Create Customer at 0.00  | 16-06-2026   | IFTU NEGES |              |              |
+| 992108743. | 30156421214 | Create Subscriber at 85. | 16-06-2026   | REBUMA MUL | 992108743.0  |              |
+|            | 30156421095 | Create Customer at 0.00  | 16-06-2026   | REBUMA MUL |              |              |
+| 992193849. | 30156420994 | Create Subscriber at 85. | 16-06-2026   | LELISA SHE | 992193849.0  |              |
+|            | 30156420870 | Create Customer at 0.00  | 16-06-2026   | LELISA SHE |              |              |
+| 957564258. | 30156420663 | Change Subscriber SIM Ca | 16-06-2026   | ABDII WALD | 957564258.0  |              |
+| 992158395. | 30156420561 | Create Subscriber at 85. | 16-06-2026   | TILHUN MUL | 992158395.0  |              |
+|            | 30156420240 | Create Customer at 0.00  | 16-06-2026   | TILHUN MUL |              |              |
++----------+-----------+------------------------+------------+----------+------------+------------+
+
+Summary
+-------
+
+Offer               27    2295.00
+Replacement         16    1600.00
+Transfer            23       0.00
+-----------------------------------
+total                     3895.00
