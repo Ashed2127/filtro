@@ -425,21 +425,20 @@ class DataProcessor:
         
         if category_col and amount_col:
             # Group by category and calculate statistics
-            category_summary = report_data.groupby(category_col).agg({
-                category_col: 'count',
-                amount_col: lambda x: self._extract_numeric_amount_series(x)
-            }).rename(columns={category_col: 'Count', amount_col: 'Amount'})
+            category_groups = report_data.groupby(category_col)
             
             # Format summary table
             report_lines.append(f"{'Category':<20} {'Count':<10} {'Amount':<15}")
             report_lines.append("-" * 50)
             
             grand_total = 0
-            for category, row in category_summary.iterrows():
-                count = int(row['Count'])
-                amount = float(row['Amount'])
-                grand_total += amount
-                report_lines.append(f"{str(category):<20} {count:<10} {amount:>10.2f}")
+            for category, group in category_groups:
+                count = len(group)
+                total_amount = group[amount_col].apply(
+                    lambda x: self._extract_numeric_amount(x)
+                ).sum()
+                grand_total += total_amount
+                report_lines.append(f"{str(category):<20} {count:<10} {total_amount:>10.2f}")
             
             report_lines.append("-" * 50)
             report_lines.append(f"{'TOTAL':<20} {'':<10} {grand_total:>10.2f}")
