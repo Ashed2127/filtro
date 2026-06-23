@@ -4,12 +4,17 @@ import os
 
 
 class DataProcessor:
-    """Handles Excel data extraction and filtering for active sales items."""
+    """Handles Excel data extraction and filtering for active sales items.
+    
+    Implements business report generation with automatic column detection,
+    compact transaction details, and comprehensive summary sections.
+    """
     
     def __init__(self):
         self.data: Optional[pd.DataFrame] = None
         self.filtered_data: Optional[pd.DataFrame] = None
         self.is_real_time_format = False
+        self.business_columns: List[str] = []
     
     def _is_real_time_file(self, file_path: str) -> bool:
         """Check if the file is a Real Time Customer Order Payment List Report."""
