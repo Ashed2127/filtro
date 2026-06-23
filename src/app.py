@@ -205,7 +205,6 @@ class FiltroApp(ctk.CTk):
             self.processor.export_to_excel(temp_file)
             
             # Open file with default application (user can print from there)
-            import platform
             if platform.system() == "Windows":
                 os.startfile(temp_file)
             elif platform.system() == "Darwin":  # macOS
