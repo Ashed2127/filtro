@@ -10,7 +10,9 @@ sample_data = {
     'Sales Date and Time': ['18-06-2024 10:30', '18-06-2024 11:45', '18-06-2024 12:00', '18-06-2024 13:15'],
     'Customer Name': ['Meskerem', 'Meskerem', 'Meskerem', 'Meskerem'],
     'Order Status': ['Completed', 'Completed', 'Completed', 'Completed'],
-    'Category': ['rep', 'rep', 'bandl', 'rep']
+    'Category': ['rep', 'rep', 'bandl', 'rep'],
+    'Ref': ['extrfa0025', 'extrfa0025', 'extrfa0025', 'extrfa0025'],
+    'Branch': ['CWR Wolis', 'CWR Wolis', 'CWR Wolis', 'CWR Wolis']
 }
 
 # Create processor and load sample data
