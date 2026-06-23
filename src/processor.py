@@ -240,15 +240,11 @@ class DataProcessor:
                     }
             
             # Create summary DataFrame with proper column names
-            summary_rows = []
+            summary_data = []
             for category, info in category_summary.items():
-                summary_rows.append({
-                    "Category": category,
-                    "Count": info["count"],
-                    "Total Amount (Birr)": f"{info['total_amount']:.2f}"
-                })
+                summary_data.append([category, info["count"], f"{info['total_amount']:.2f}"])
             
-            summary_df = pd.DataFrame(summary_rows)
+            summary_df = pd.DataFrame(summary_data, columns=['Category', 'Count', 'Total Amount (Birr)'])
             
             # Combine data and summary
             with pd.ExcelWriter(output_path, engine='openpyxl') as writer:
@@ -264,7 +260,8 @@ class DataProcessor:
                     sheet_name='Transactions', 
                     startrow=start_row, 
                     startcol=0, 
-                    index=False
+                    index=False,
+                    header=True
                 )
             
             return True
