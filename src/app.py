@@ -23,7 +23,7 @@ class FiltroApp(ctk.CTk):
     def setup_window(self):
         """Configure main window properties."""
         self.title("Filtro - Excel Filter & Print Tool")
-        self.geometry("800x600")
+        self.geometry("800x700")
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("blue")
     
