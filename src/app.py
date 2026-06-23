@@ -278,7 +278,13 @@ class FiltroApp(ctk.CTk):
             self.processor.export_to_excel(temp_file)
             
             # Open file with default application (user can print from there)
-            os.startfile(temp_file)
+            import platform
+            if platform.system() == "Windows":
+                os.startfile(temp_file)
+            elif platform.system() == "Darwin":  # macOS
+                os.system(f"open '{temp_file}'")
+            else:  # Linux
+                os.system(f"xdg-open '{temp_file}'")
             
             messagebox.showinfo("Print", f"Data exported to {temp_file}. Please print from Excel with A5 paper size settings.")
             
