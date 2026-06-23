@@ -450,11 +450,11 @@ class DataProcessor:
         report_lines = []
         
         # Create table header
-        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 24 + "+" + "-" * 12 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
+        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 22 + "+" + "-" * 12 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
         report_lines.append(separator)
         
         # Add column headers
-        headers = "| ID1      | ID2       | Transaction            | Date       | User     | Reference  | Branch     |"
+        headers = "| ID1      | ID2       | Transaction           | Date       | User     | Reference  | Branch     |"
         report_lines.append(headers)
         report_lines.append(separator)
         
