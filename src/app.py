@@ -252,7 +252,10 @@ class FiltroApp(ctk.CTk):
         try:
             # Export to temporary Excel file for printing
             temp_file = "temp_filtered_output.xlsx"
-            self.processor.export_to_excel(temp_file)
+            
+            # Use summary export if data has categories
+            with_summary = "Category" in self.processor.filtered_data.columns
+            self.processor.export_to_excel(temp_file, with_summary=with_summary)
             
             # Open file with default application (user can print from there)
             if platform.system() == "Windows":
@@ -262,7 +265,8 @@ class FiltroApp(ctk.CTk):
             else:  # Linux
                 os.system(f"xdg-open '{temp_file}'")
             
-            messagebox.showinfo("Print", f"Data exported to {temp_file}. Please print from Excel with A5 paper size settings.")
+            summary_note = " with category summaries" if with_summary else ""
+            messagebox.showinfo("Print", f"Data exported to {temp_file}{summary_note}. Please print from Excel with A5 paper size settings.")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to prepare print data: {str(e)}")
