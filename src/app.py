@@ -126,6 +126,16 @@ class FiltroApp(ctk.CTk):
         )
         self.process_button.pack(side="left", padx=10, pady=10, expand=True, fill="x")
         
+        self.report_button = ctk.CTkButton(
+            self.button_frame,
+            text="Generate Report",
+            command=self.generate_report,
+            height=40,
+            fg_color="#FF9500",
+            hover_color="#CC7700"
+        )
+        self.report_button.pack(side="left", padx=10, pady=10, expand=True, fill="x")
+        
         self.print_button = ctk.CTkButton(
             self.button_frame,
             text="Print (A5)",
