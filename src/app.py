@@ -170,6 +170,7 @@ class FiltroApp(ctk.CTk):
         
         status_column = self.status_entry.get() or "status"
         active_value = self.active_entry.get() or "active"
+        filter_type = self.filter_type_var.get()
         
         try:
             # Load the Excel file
@@ -179,19 +180,27 @@ class FiltroApp(ctk.CTk):
             
             # Update UI to show detected format
             if self.processor.is_real_time_format:
-                self.hint_label.configure(text="Detected: Real Time format - Using 'Order Status' = 'Completed'")
+                if filter_type == "specific":
+                    self.hint_label.configure(text="Detected: Real Time format - Using specific transaction filter (85/100 Birr + Zero Price)")
+                else:
+                    self.hint_label.configure(text="Detected: Real Time format - Using 'Order Status' = 'Completed'")
             else:
                 self.hint_label.configure(text="Detected: Standard format - Using custom filter settings")
             
-            # Filter active sales
-            self.processor.filter_active_sales(status_column, active_value)
+            # Apply appropriate filter
+            if filter_type == "specific" and self.processor.is_real_time_format:
+                # Use specific transaction filtering
+                self.processor.filter_specific_transactions()
+            else:
+                # Use standard filtering
+                self.processor.filter_active_sales(status_column, active_value)
             
             # Format for printing with suggested columns
             if self.processor.is_real_time_format:
                 # Suggested columns for Real Time format
                 suggested_columns = [
                     "Date", "Sales Date and Time", "Customer Name", "Service Number",
-                    "Order No", "Total Payment Amount", "Order Status"
+                    "Order No", "Total Payment Amount", "Order Status", "Business Operation"
                 ]
                 formatted_data = self.processor.format_for_printing(suggested_columns)
             else:
