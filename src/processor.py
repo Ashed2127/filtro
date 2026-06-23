@@ -382,7 +382,7 @@ class DataProcessor:
         # Format Transaction column: combine Business Operation and Amount
         if "Business Operation" in self.filtered_data.columns and "Total Payment Amount" in self.filtered_data.columns:
             formatted_data["Transaction"] = self.filtered_data.apply(
-                lambda row: f"{row['Business Operation']} at {self._clean_payment_amount(row['Total Payment Amount'])} Birr",
+                lambda row: f"{row['Business Operation']} at {self._clean_payment_amount(row['Total Payment Amount'])}.",
                 axis=1
             )
         elif "Business Operation" in self.filtered_data.columns:
