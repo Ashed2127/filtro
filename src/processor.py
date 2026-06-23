@@ -239,10 +239,13 @@ class DataProcessor:
         # Remove 'Birr' suffix, commas, and any whitespace
         amount_str = amount_str.replace("Birr", "").replace(",", "").strip()
         
-        # Format to 2 decimal places if it's a number
+        # Format to appropriate decimal places (no .00 for integers)
         try:
             num_amount = float(amount_str)
-            return f"{num_amount:.2f}"
+            if num_amount == int(num_amount):
+                return str(int(num_amount))
+            else:
+                return f"{num_amount:.2f}"
         except (ValueError, TypeError):
             return amount_str
     
