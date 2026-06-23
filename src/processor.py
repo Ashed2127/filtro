@@ -56,6 +56,76 @@ class DataProcessor:
         
         return self.filtered_data
     
+    def filter_specific_transactions(self) -> pd.DataFrame:
+        """Filter for specific transaction types: 85.00Birr, 100.00Birr, and zero price operations."""
+        if self.data is None:
+            raise ValueError("No data loaded. Call load_excel first.")
+        
+        if not self.is_real_time_format:
+            print("Warning: Specific transaction filtering is only available for Real Time format.")
+            return self.data.copy()
+        
+        # First filter by Order Status = Completed
+        if "Order Status" in self.data.columns:
+            status_mask = self.data["Order Status"].str.lower() == "completed"
+            filtered_by_status = self.data[status_mask].copy()
+        else:
+            filtered_by_status = self.data.copy()
+        
+        # Clean payment amounts for filtering
+        filtered_by_status["CleanAmount"] = filtered_by_status["Total Payment Amount"].apply(
+            lambda x: self._extract_numeric_amount(x)
+        )
+        
+        # Filter for specific amounts: 85.00, 100.00, and 0.00
+        amount_mask = (
+            (filtered_by_status["CleanAmount"] == 85.00) |
+            (filtered_by_status["CleanAmount"] == 100.00) |
+            (filtered_by_status["CleanAmount"] == 0.00)
+        )
+        
+        # For zero price transactions, also check Business Operation column
+        zero_price_mask = filtered_by_status["CleanAmount"] == 0.00
+        if "Business Operation" in filtered_by_status.columns:
+            # Include zero price transactions with specific business operations
+            business_operations_to_include = [
+                "Change Subscriber SIM Card",
+                "Create Customer", 
+                "Change Supplementary Offering"
+            ]
+            business_op_mask = filtered_by_status["Business Operation"].isin(business_operations_to_include)
+            # Combine: either (zero price AND valid business op) OR (85/100 birr)
+            final_mask = (
+                (zero_price_mask & business_op_mask) |
+                (filtered_by_status["CleanAmount"] == 85.00) |
+                (filtered_by_status["CleanAmount"] == 100.00)
+            )
+        else:
+            # If no Business Operation column, just use amount filter
+            final_mask = amount_mask
+        
+        self.filtered_data = filtered_by_status[final_mask].copy()
+        
+        # Remove the temporary CleanAmount column
+        if "CleanAmount" in self.filtered_data.columns:
+            del self.filtered_data["CleanAmount"]
+        
+        return self.filtered_data
+    
+    def _extract_numeric_amount(self, amount):
+        """Extract numeric value from payment amount string."""
+        if pd.isna(amount) or amount == "":
+            return 0.0
+        
+        amount_str = str(amount)
+        # Remove 'Birr' suffix, commas, and whitespace
+        amount_str = amount_str.replace("Birr", "").replace(",", "").strip()
+        
+        try:
+            return float(amount_str)
+        except (ValueError, TypeError):
+            return 0.0
+    
     def format_for_printing(self, 
                            columns_to_include: Optional[List[str]] = None) -> pd.DataFrame:
         """Format data for A5 paper printing."""
