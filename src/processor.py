@@ -244,8 +244,6 @@ class DataProcessor:
             for category, info in category_summary.items():
                 summary_data.append([category, info["count"], f"{info['total_amount']:.2f}"])
             
-            summary_df = pd.DataFrame(summary_data, columns=['Category', 'Count', 'Total Amount (Birr)'])
-            
             # Combine data and summary using openpyxl directly
             from openpyxl import load_workbook
             from openpyxl.styles import Font
@@ -259,6 +257,11 @@ class DataProcessor:
             
             # Find the next empty row after the data
             start_row = len(data) + 4  # Leave 3 empty rows for spacing
+            
+            # Clear cells in the summary section to avoid column confusion
+            for row in range(start_row, start_row + 10):
+                for col in range(1, ws.max_column + 1):
+                    ws.cell(row=row, column=col, value=None)
             
             # Write summary header
             ws.cell(row=start_row, column=1, value="CATEGORY SUMMARY")
