@@ -1,0 +1,70 @@
+==================================================
+FILTERED TRANSACTIONS
+==================================================
+
+Date  Sales Date and   Customer Type  Customer Catego  Customer Sub-ca  Customer Level  Staff Name  Business Operat  Subscriber Type  Network Type  Offering Name  Customer Name  Service Number  Order Status  Total Payment A  Order No  Payment by Cash  Payment by tele
+--------------------------------------------------
+16-06-2026 18:2  16-06-2026 18:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  MULATU SHIFERAW  992155197.0  Completed  85.00Birr  30156434668580.    85.00Birr
+16-06-2026 18:2  16-06-2026 18:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        MULATU SHIFERAW    Completed  0.00Birr  30156434160717.    
+16-06-2026 18:2  16-06-2026 18:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  KUDEMA ANGASU D  992106957.0  Completed  85.00Birr  30156434160712.    85.00Birr
+16-06-2026 18:2  16-06-2026 18:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        KUDEMA ANGASU D    Completed  0.00Birr  30156434160696.    
+16-06-2026 18:2  16-06-2026 18:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  ABDI BEKELE TAD  992253907.0  Completed  85.00Birr  30156434160687.    85.00Birr
+16-06-2026 18:2  16-06-2026 18:0  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        ABDI BEKELE TAD    Completed  0.00Birr  30156433587471.    
+16-06-2026 18:2  16-06-2026 17:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BIRTUKAN LEMA A  992174353.0  Completed  85.00Birr  30156432650760.    85.00Birr
+16-06-2026 18:2  16-06-2026 17:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BIRTUKAN LEMA A    Completed  0.00Birr  30156432650745.    
+16-06-2026 18:2  16-06-2026 17:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  GELANE ENDEBU D  921369877.0  Completed  100.00Birr  30156432362963.    100.00Birr
+16-06-2026 18:2  16-06-2026 17:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  GALO NEGASH NEG  992256499.0  Completed  85.00Birr  30156432362948.    85.00Birr
+16-06-2026 18:2  16-06-2026 17:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        GALO NEGASH NEG    Completed  0.00Birr  30156432221559.    
+16-06-2026 18:2  16-06-2026 16:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  WENDIMU TAZERA   992247321.0  Completed  85.00Birr  30156431817095.    85.00Birr
+16-06-2026 18:2  16-06-2026 16:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        WENDIMU TAZERA     Completed  0.00Birr  30156431710345.    
+16-06-2026 18:2  16-06-2026 16:3  Individual  Residential  Residential  Silver  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  DANIYIEL NUGUSE  946741439.0  Completed  100.00Birr  30156431184106.    100.00Birr
+16-06-2026 18:2  16-06-2026 16:2  Individual  Residential  Residential  Silver  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  Abdurehim Nuriy  992134067.0  Completed  85.00Birr  30156431074180.    85.00Birr
+16-06-2026 18:2  16-06-2026 16:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  DAME WEDIMU DIR  992238706.0  Completed  85.00Birr  30156430627333.    85.00Birr
+16-06-2026 18:2  16-06-2026 16:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        DAME WEDIMU DIR    Completed  0.00Birr  30156430407119.    
+16-06-2026 18:2  16-06-2026 16:0  Individual  Residential  Residential  Gold  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  tokuma tasisa d  928782647.0  Completed  100.00Birr  30156430315707.    100.00Birr
+16-06-2026 18:2  16-06-2026 16:0  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  MARE TEGEGNE ME  955873814.0  Completed  100.00Birr  30156430213789.    100.00Birr
+16-06-2026 18:2  16-06-2026 15:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  MARE TEGEGNE ME  968614860.0  Completed  100.00Birr  30156430123776.    100.00Birr
+16-06-2026 18:2  16-06-2026 15:5  Individual  Residential  Residential  Gold  Tsion Abera Dug  Change Suppleme  Prepaid  LTE  4G LTE Mobile (  Gurmu Abebe Bed  973533700.0  Completed  0.00Birr  30156430003109.    
+16-06-2026 18:2  16-06-2026 15:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  EFE MULDETA BEN  992188175.0  Completed  85.00Birr  30156429896868.    85.00Birr
+16-06-2026 18:2  16-06-2026 15:4  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        EFE MULDETA BEN    Completed  0.00Birr  30156429832927.    
+16-06-2026 18:2  16-06-2026 15:4  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BURUK KEBEDE WO  992207553.0  Completed  85.00Birr  30156429730524.    85.00Birr
+16-06-2026 18:2  16-06-2026 15:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BURUK KEBEDE WO    Completed  0.00Birr  30156429537104.    
+16-06-2026 18:2  16-06-2026 15:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  ABERA LACHISI G  973789881.0  Completed  100.00Birr  30156429374153.    100.00Birr
+16-06-2026 18:2  16-06-2026 14:0  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  GONFA HIRKO WAD  931992827.0  Completed  100.00Birr  30156426751965.    100.00Birr
+16-06-2026 18:2  16-06-2026 13:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BIRUT ASFA ABDL  992070876.0  Completed  85.00Birr  30156426681895.    85.00Birr
+16-06-2026 18:2  16-06-2026 13:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BIRUT ASFA ABDL    Completed  0.00Birr  30156426455237.    
+16-06-2026 18:2  16-06-2026 13:4  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  DEREJE SEBARU M  992116470.0  Completed  85.00Birr  30156426407679.    85.00Birr
+16-06-2026 18:2  16-06-2026 13:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  DAMEE TOLERA TI  940496689.0  Completed  100.00Birr  30156425858553.    100.00Birr
+16-06-2026 18:2  16-06-2026 13:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  FEYISA MERGA EJ  927249643.0  Completed  100.00Birr  30156425785138.    100.00Birr
+16-06-2026 18:2  16-06-2026 13:2  Individual  Residential  Residential  Gold  Tsion Abera Dug  Change Suppleme  Prepaid  LTE  4G LTE Mobile (  KIFLE ACHALU DA  914641394.0  Completed  0.00Birr  30156425700661.    
+16-06-2026 18:2  16-06-2026 13:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  KIFLE ACHALU DA  992102817.0  Completed  85.00Birr  30156425700648.    85.00Birr
+16-06-2026 18:2  16-06-2026 13:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        KIFLE ACHALU DA    Completed  0.00Birr  30156425597576.    
+16-06-2026 18:2  16-06-2026 13:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BEKRI LIKISA GA  992067901.0  Completed  85.00Birr  30156425416396.    85.00Birr
+16-06-2026 18:2  16-06-2026 13:0  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BEKRI LIKISA GA    Completed  0.00Birr  30156425277701.    
+16-06-2026 18:2  16-06-2026 12:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BIKILTU MULISA   992072767.0  Completed  85.00Birr  30156424999176.    85.00Birr
+16-06-2026 18:2  16-06-2026 12:5  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BIKILTU MULISA     Completed  0.00Birr  30156424860374.    
+16-06-2026 18:2  16-06-2026 12:4  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  FASIGA TADESE Z  992059413.0  Completed  85.00Birr  30156424642560.    85.00Birr
+16-06-2026 18:2  16-06-2026 12:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        FASIGA TADESE Z    Completed  0.00Birr  30156424529462.    
+16-06-2026 18:2  16-06-2026 12:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Change Subscrib  Prepaid  WCDMA  WCDMA 3G (Prepa  terefe basisa b  929476965.0  Completed  100.00Birr  30156424378732.    100.00Birr
+16-06-2026 18:2  16-06-2026 12:2  Individual  Residential  Residential  Gold  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  TEREFE BERSISA   930241866.0  Completed  100.00Birr  30156424030996.    100.00Birr
+16-06-2026 18:2  16-06-2026 12:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  BONTU KORICHA D  992079436.0  Completed  85.00Birr  30156423989010.    85.00Birr
+16-06-2026 18:2  16-06-2026 12:1  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        BONTU KORICHA D    Completed  0.00Birr  30156423833512.    
+16-06-2026 18:2  16-06-2026 12:0  Individual  Residential  Residential  Gold  Tsion Abera Dug  Change Subscrib  Prepaid  LTE  4G LTE Mobile (  FIRAOL MOKONIN   900468621.0  Completed  100.00Birr  30156423639351.    100.00Birr
+16-06-2026 18:2  16-06-2026 11:4  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  ARARSA ABASHU N  992082058.0  Completed  85.00Birr  30156423000002.  85.00Birr  
+16-06-2026 18:2  16-06-2026 11:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        ARARSA ABASHU N    Completed  0.00Birr  30156422903231.    
+16-06-2026 18:2  16-06-2026 11:3  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Subscrib  Prepaid  LTE  4G LTE Mobile (  ABERASH MOSISA   992102644.0  Completed  85.00Birr  30156422747881.  85.00Birr  
+16-06-2026 18:2  16-06-2026 11:2  Individual  Residential  Residential  Bronze  Tsion Abera Dug  Create Customer        ABERASH MOSISA     Completed  0.00Birr  30156422567410.    
+... and 16 more records
+
+==================================================
+SUMMARY
+==================================================
+
+Category             Count      Amount         
+--------------------------------------------------
+Change Subscriber SIM Card 16            1600.00
+Change Supplementary Offering 2                0.00
+Create Customer      21               0.00
+Create Subscriber    27            2295.00
+--------------------------------------------------
+TOTAL                              3895.00
