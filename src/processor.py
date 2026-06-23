@@ -239,7 +239,12 @@ class DataProcessor:
         # Remove 'Birr' suffix, commas, and any whitespace
         amount_str = amount_str.replace("Birr", "").replace(",", "").strip()
         
-        return amount_str
+        # Format to 2 decimal places if it's a number
+        try:
+            num_amount = float(amount_str)
+            return f"{num_amount:.2f}"
+        except (ValueError, TypeError):
+            return amount_str
     
     def get_summary(self) -> Dict:
         """Get summary statistics of the filtered data."""
