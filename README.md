@@ -91,6 +91,10 @@ The application bundles:
 - Configurable filtering options (status column, active value)
 - Data preview in the GUI
 - Export to Excel for A5 printing
+- **NEW**: Automatic business column detection
+- **NEW**: Compact business report generation with transaction details and summary sections
+- **NEW**: Category-based grouping with counts and amounts
+- **NEW**: Print-ready A4 formatting for business reports
 
 ## 🔄 Auto-Commit Monitor
 
