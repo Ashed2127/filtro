@@ -159,8 +159,8 @@ class DataProcessor:
             return ""
         
         amount_str = str(amount)
-        # Remove 'Birr' suffix and any whitespace
-        amount_str = amount_str.replace("Birr", "").strip()
+        # Remove 'Birr' suffix, commas, and any whitespace
+        amount_str = amount_str.replace("Birr", "").replace(",", "").strip()
         
         return amount_str
     
