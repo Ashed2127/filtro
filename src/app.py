@@ -153,6 +153,14 @@ class FiltroApp(ctk.CTk):
         self.active_entry.pack(fill="x", padx=10, pady=(5, 10))
         self.active_entry.insert(0, "active")
         
+        # Column selection hint
+        self.hint_label = ctk.CTkLabel(
+            self.filter_frame,
+            text="Note: For 'Real Time' files, Order Status will be used automatically",
+            font=ctk.CTkFont(size=10)
+        )
+        self.hint_label.pack(anchor="w", padx=10, pady=(0, 10))
+        
         # Action Buttons
         self.button_frame = ctk.CTkFrame(self.main_frame)
         self.button_frame.pack(fill="x", pady=(0, 20))
