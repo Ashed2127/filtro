@@ -435,8 +435,8 @@ class DataProcessor:
         """Generate a business report with the specific table structure and summary format.
         
         Returns a formatted string containing:
-        - Table with columns: ID1, ID2, Transaction, Date, User, Reference, Branch
-        - Summary section with category grouping
+        - Table with columns: ID1, ID2, Transaction, Date, User, Reference, Branch (limited rows)
+        - Summary section with category grouping (without "Summary" header)
         - Category counts and amounts
         - Grand total
         """
@@ -458,8 +458,9 @@ class DataProcessor:
         report_lines.append(headers)
         report_lines.append(separator)
         
-        # Add data rows
-        for idx, row in report_data.iterrows():
+        # Add data rows (limited to first 10 rows)
+        max_rows = 10
+        for idx, row in report_data.head(max_rows).iterrows():
             id1 = str(row["ID1"])[:10].ljust(10)
             id2 = str(row["ID2"])[:11].ljust(11)
             transaction = str(row["Transaction"])[:24].ljust(24)
@@ -474,11 +475,7 @@ class DataProcessor:
         report_lines.append(separator)
         report_lines.append("")
         
-        # Generate summary section
-        report_lines.append("Summary")
-        report_lines.append("-------")
-        report_lines.append("")
-        
+        # Generate summary section (without "Summary" header)
         # Determine category column
         category_col = None
         potential_cat_cols = ['Category', 'category', 'Type', 'type', 'Business Operation', 'business operation']
