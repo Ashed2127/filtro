@@ -458,11 +458,11 @@ class DataProcessor:
         report_lines = []
         
         # Create table header
-        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 22 + "+" + "-" * 12 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
+        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 24 + "+" + "-" * 12 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
         report_lines.append(separator)
         
         # Add column headers
-        headers = "| ID1      | ID2       | Transaction           | Date       | User     | Reference  | Branch     |"
+        headers = "| ID1      | ID2       | Transaction            | Date       | User     | Reference  | Branch     |"
         report_lines.append(headers)
         report_lines.append(separator)
         
@@ -471,7 +471,7 @@ class DataProcessor:
         for idx, row in report_data.head(max_rows).iterrows():
             id1 = str(row["ID1"])[:10].ljust(10)
             id2 = str(row["ID2"])[:11].ljust(11)
-            transaction = str(row["Transaction"])[:22].ljust(22)  # Truncate to 22 chars
+            transaction = str(row["Transaction"])[:24].ljust(24)  # Increased to 24 chars
             date = str(row["Date"])[:12].ljust(12)
             user = str(row["User"])[:10].ljust(10)
             reference = str(row["Reference"])[:12].ljust(12)
