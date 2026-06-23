@@ -365,7 +365,7 @@ class DataProcessor:
             return False
     
     def format_for_report(self) -> pd.DataFrame:
-        """Format filtered data for the specific report structure: ID1, ID2, Transaction, Date, User, Reference, Branch."""
+        """Format filtered data for the specific report structure: ID1, ID2, Transaction, Sales Date & Time, User, Staff Name, Branch."""
         if self.filtered_data is None:
             raise ValueError("No filtered data available for formatting.")
         
@@ -398,13 +398,13 @@ class DataProcessor:
         else:
             formatted_data["Transaction"] = "Payment"
         
-        # Map Date column
-        if "Date" in self.filtered_data.columns:
-            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Date"], dayfirst=True).dt.strftime("%d-%m-%Y")
-        elif "Sales Date and Time" in self.filtered_data.columns:
-            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Sales Date and Time"], dayfirst=True).dt.strftime("%d-%m-%Y")
+        # Map Sales Date & Time column
+        if "Sales Date and Time" in self.filtered_data.columns:
+            formatted_data["Sales Date & Time"] = pd.to_datetime(self.filtered_data["Sales Date and Time"], dayfirst=True).dt.strftime("%d-%m-%Y %H:%M")
+        elif "Date" in self.filtered_data.columns:
+            formatted_data["Sales Date & Time"] = pd.to_datetime(self.filtered_data["Date"], dayfirst=True).dt.strftime("%d-%m-%Y")
         else:
-            formatted_data["Date"] = ""
+            formatted_data["Sales Date & Time"] = ""
         
         # Map User column
         if "Customer Name" in self.filtered_data.columns:
@@ -414,15 +414,19 @@ class DataProcessor:
         else:
             formatted_data["User"] = ""
         
-        # Map Reference column - try to find a better reference field
-        if "Reference" in self.filtered_data.columns:
-            formatted_data["Reference"] = self.filtered_data["Reference"]
+        # Map Staff Name column - try to find staff-related fields
+        if "Staff Name" in self.filtered_data.columns:
+            formatted_data["Staff Name"] = self.filtered_data["Staff Name"]
+        elif "Staff" in self.filtered_data.columns:
+            formatted_data["Staff Name"] = self.filtered_data["Staff"]
+        elif "Agent" in self.filtered_data.columns:
+            formatted_data["Staff Name"] = self.filtered_data["Agent"]
+        elif "Reference" in self.filtered_data.columns:
+            formatted_data["Staff Name"] = self.filtered_data["Reference"]
         elif "Ref" in self.filtered_data.columns:
-            formatted_data["Reference"] = self.filtered_data["Ref"]
-        elif "Service Number" in self.filtered_data.columns:
-            formatted_data["Reference"] = self.filtered_data["Service Number"]
+            formatted_data["Staff Name"] = self.filtered_data["Ref"]
         else:
-            formatted_data["Reference"] = ""
+            formatted_data["Staff Name"] = ""
         
         # Map Branch column
         if "Branch" in self.filtered_data.columns:
