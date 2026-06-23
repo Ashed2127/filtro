@@ -22,7 +22,7 @@ class DataProcessor:
         return filename.startswith("Real Time")
     
     def load_excel(self, file_path: str) -> bool:
-        """Load data from Excel file."""
+        """Load data from Excel file and auto-detect business columns."""
         try:
             self.is_real_time_format = self._is_real_time_file(file_path)
             
@@ -32,6 +32,9 @@ class DataProcessor:
             else:
                 # Standard format
                 self.data = pd.read_excel(file_path)
+            
+            # Auto-detect business-relevant columns
+            self._detect_business_columns()
             
             return True
         except Exception as e:
