@@ -356,6 +356,77 @@ class DataProcessor:
             print(f"Error exporting to Excel: {e}")
             return False
     
+    def format_for_report(self) -> pd.DataFrame:
+        """Format filtered data for the specific report structure: ID1, ID2, Transaction, Date, User, Reference, Branch."""
+        if self.filtered_data is None:
+            raise ValueError("No filtered data available for formatting.")
+        
+        # Map existing columns to the required structure
+        formatted_data = pd.DataFrame()
+        
+        # Map columns based on available data
+        if "Service Number" in self.filtered_data.columns:
+            formatted_data["ID1"] = self.filtered_data["Service Number"]
+        elif "Customer ID" in self.filtered_data.columns:
+            formatted_data["ID1"] = self.filtered_data["Customer ID"]
+        else:
+            formatted_data["ID1"] = ""
+        
+        if "Order No" in self.filtered_data.columns:
+            formatted_data["ID2"] = self.filtered_data["Order No"]
+        elif "Order Number" in self.filtered_data.columns:
+            formatted_data["ID2"] = self.filtered_data["Order Number"]
+        else:
+            formatted_data["ID2"] = ""
+        
+        # Format Transaction column: combine Business Operation and Amount
+        if "Business Operation" in self.filtered_data.columns and "Total Payment Amount" in self.filtered_data.columns:
+            formatted_data["Transaction"] = self.filtered_data.apply(
+                lambda row: f"{row['Business Operation']} at {self._clean_payment_amount(row['Total Payment Amount'])} Birr",
+                axis=1
+            )
+        elif "Business Operation" in self.filtered_data.columns:
+            formatted_data["Transaction"] = self.filtered_data["Business Operation"]
+        else:
+            formatted_data["Transaction"] = "Payment"
+        
+        # Map Date column
+        if "Date" in self.filtered_data.columns:
+            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Date"]).dt.strftime("%d-%m-%Y")
+        elif "Sales Date and Time" in self.filtered_data.columns:
+            formatted_data["Date"] = pd.to_datetime(self.filtered_data["Sales Date and Time"]).dt.strftime("%d-%m-%Y")
+        else:
+            formatted_data["Date"] = ""
+        
+        # Map User column
+        if "Customer Name" in self.filtered_data.columns:
+            formatted_data["User"] = self.filtered_data["Customer Name"]
+        elif "User" in self.filtered_data.columns:
+            formatted_data["User"] = self.filtered_data["User"]
+        else:
+            formatted_data["User"] = ""
+        
+        # Map Reference column
+        if "Service Number" in self.filtered_data.columns:
+            formatted_data["Reference"] = self.filtered_data["Service Number"]
+        elif "Reference" in self.filtered_data.columns:
+            formatted_data["Reference"] = self.filtered_data["Reference"]
+        else:
+            formatted_data["Reference"] = ""
+        
+        # Map Branch column
+        if "Branch" in self.filtered_data.columns:
+            formatted_data["Branch"] = self.filtered_data["Branch"]
+        elif "Location" in self.filtered_data.columns:
+            formatted_data["Branch"] = self.filtered_data["Location"]
+        else:
+            formatted_data["Branch"] = ""
+        
+        # Fill empty values
+        formatted_data = formatted_data.fillna("")
+        
+        return formatted_data
+    
     def generate_business_report(self) -> str:
         """Generate a compact, professional, print-ready business report.
         
