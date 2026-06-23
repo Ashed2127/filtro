@@ -168,10 +168,11 @@ class FiltroApp(ctk.CTk):
     
     def _on_mousewheel(self, event):
         """Handle mouse wheel scrolling for the results textbox."""
-        if event.num == 4 or event.delta > 0:
-            self.results_text.yview_scroll(-1, "units")
-        elif event.num == 5 or event.delta < 0:
+        # Linux uses event.num (4=up, 5=down), Windows/Mac use event.delta
+        if event.num == 5 or event.delta < 0:
             self.results_text.yview_scroll(1, "units")
+        elif event.num == 4 or event.delta > 0:
+            self.results_text.yview_scroll(-1, "units")
     
     def browse_file(self):
         """Open file dialog to select Excel file."""
