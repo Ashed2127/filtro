@@ -453,7 +453,7 @@ class DataProcessor:
         """Generate a business report with the specific table structure and summary format.
         
         Returns a formatted string containing:
-        - Table with columns: ID1, ID2, Transaction, Sales Date & Time, User, Staff Name, Branch (limited rows)
+        - Table with columns: ID1, ID2, Transaction, Sales Date & Time, Department, Staff Name, Branch (limited rows)
         - Summary section with category grouping (without "Summary" header)
         - Category counts and amounts
         - Grand total
@@ -468,11 +468,11 @@ class DataProcessor:
         report_lines = []
         
         # Create table header with adjusted column widths
-        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 24 + "+" + "-" * 18 + "+" + "-" * 10 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
+        separator = "+" + "-" * 10 + "+" + "-" * 11 + "+" + "-" * 24 + "+" + "-" * 18 + "+" + "-" * 12 + "+" + "-" * 12 + "+" + "-" * 12 + "+"
         report_lines.append(separator)
         
         # Add column headers
-        headers = "| ID1      | ID2       | Transaction            | Sales Date & Time | User     | Staff Name | Branch     |"
+        headers = "| ID1      | ID2       | Transaction            | Sales Date & Time | Department | Staff Name | Branch     |"
         report_lines.append(headers)
         report_lines.append(separator)
         
@@ -483,11 +483,11 @@ class DataProcessor:
             id2 = str(row["ID2"])[:11].ljust(11)
             transaction = str(row["Transaction"])[:24].ljust(24)
             sales_date_time = str(row["Sales Date & Time"])[:18].ljust(18)
-            user = str(row["User"])[:10].ljust(10)
+            department = str(row["Department"])[:12].ljust(12)
             staff_name = str(row["Staff Name"])[:12].ljust(12)
             branch = str(row["Branch"])[:12].ljust(12)
             
-            row_str = f"| {id1} | {id2} | {transaction} | {sales_date_time} | {user} | {staff_name} | {branch} |"
+            row_str = f"| {id1} | {id2} | {transaction} | {sales_date_time} | {department} | {staff_name} | {branch} |"
             report_lines.append(row_str)
         
         report_lines.append(separator)
