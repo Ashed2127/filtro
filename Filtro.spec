@@ -9,7 +9,7 @@ block_cipher = None
 
 a = Analysis(
     ['src/app.py'],
-    pathex=[],
+    pathex=['src'],
     binaries=[],
     datas=[
         # Add any data files here if needed
@@ -22,6 +22,7 @@ a = Analysis(
         'openpyxl',
         'pillow',
         'tkinter',
+        'processor',
     ],
     hookspath=[],
     hooksconfig={},
