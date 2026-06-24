@@ -8,8 +8,8 @@ This configuration is optimized for Windows 10 compatibility
 block_cipher = None
 
 a = Analysis(
-    ['src/app.py'],
-    pathex=['src'],
+    ['main.py'],
+    pathex=['.'],
     binaries=[],
     datas=[
         # Add the entire src directory as data files
@@ -23,6 +23,7 @@ a = Analysis(
         'pillow',
         'tkinter',
         'processor',
+        'app',
     ],
     hookspath=[],
     hooksconfig={},

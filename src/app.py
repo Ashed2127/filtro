@@ -5,7 +5,7 @@ import os
 import platform
 import pandas as pd
 from typing import List, Dict, Optional
-from .processor import DataProcessor
+from processor import DataProcessor
 
 
 class FiltroApp(ctk.CTk):
