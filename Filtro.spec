@@ -12,8 +12,8 @@ a = Analysis(
     pathex=['src'],
     binaries=[],
     datas=[
-        # Add any data files here if needed
-        # ('src/data', 'data'),
+        # Add the entire src directory as data files
+        ('src/processor.py', 'src'),
     ],
     hiddenimports=[
         'customtkinter',
