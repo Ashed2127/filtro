@@ -1,0 +1,20 @@
++----------+-----------+------------------------+------------------+------------+------------+------------+
+| ID1      | ID2       | Transaction            | Sales Date & Time | Department | Staff Name | Branch     |
++----------+-----------+------------------------+------------------+------------+------------+------------+
+| 992155197. | 30156434668 | Create Subscriber at 85. | 16-06-2026 18:22   | CWR Woliso F | Tsion Abera  |              |
+|            | 30156434160 | Create Customer at 0.    | 16-06-2026 18:20   | CWR Woliso F | Tsion Abera  |              |
+| 992106957. | 30156434160 | Create Subscriber at 85. | 16-06-2026 18:16   | CWR Woliso F | Tsion Abera  |              |
+|            | 30156434160 | Create Customer at 0.    | 16-06-2026 18:14   | CWR Woliso F | Tsion Abera  |              |
+| 992253907. | 30156434160 | Create Subscriber at 85. | 16-06-2026 18:10   | CWR Woliso F | Tsion Abera  |              |
+|            | 30156433587 | Create Customer at 0.    | 16-06-2026 18:08   | CWR Woliso F | Tsion Abera  |              |
+| 992174353. | 30156432650 | Create Subscriber at 85. | 16-06-2026 17:26   | CWR Woliso F | Tsion Abera  |              |
+|            | 30156432650 | Create Customer at 0.    | 16-06-2026 17:24   | CWR Woliso F | Tsion Abera  |              |
+| 921369877. | 30156432362 | Change Subscriber SIM Ca | 16-06-2026 17:19   | CWR Woliso F | Tsion Abera  |              |
+| 992256499. | 30156432362 | Create Subscriber at 85. | 16-06-2026 17:14   | CWR Woliso F | Tsion Abera  |              |
++----------+-----------+------------------------+------------------+------------+------------+------------+
+
+Offer               27    2295.00
+Replacement         16    1600.00
+Transfer            23       0.00
+-----------------------------------
+total                     3895.00
