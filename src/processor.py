@@ -365,7 +365,7 @@ class DataProcessor:
             return False
     
     def format_for_report(self) -> pd.DataFrame:
-        """Format filtered data for the specific report structure: ID1, ID2, Transaction, Sales Date & Time, User, Staff Name, Branch."""
+        """Format filtered data for the specific report structure: ID1, ID2, Transaction, Sales Date & Time, Department, Staff Name, Branch."""
         if self.filtered_data is None:
             raise ValueError("No filtered data available for formatting.")
         
@@ -406,13 +406,19 @@ class DataProcessor:
         else:
             formatted_data["Sales Date & Time"] = ""
         
-        # Map User column
-        if "Customer Name" in self.filtered_data.columns:
-            formatted_data["User"] = self.filtered_data["Customer Name"]
-        elif "User" in self.filtered_data.columns:
-            formatted_data["User"] = self.filtered_data["User"]
+        # Map Department column - try to find department-related fields
+        if "Department" in self.filtered_data.columns:
+            formatted_data["Department"] = self.filtered_data["Department"]
+        elif "Dept" in self.filtered_data.columns:
+            formatted_data["Department"] = self.filtered_data["Dept"]
+        elif "Division" in self.filtered_data.columns:
+            formatted_data["Department"] = self.filtered_data["Division"]
+        elif "Unit" in self.filtered_data.columns:
+            formatted_data["Department"] = self.filtered_data["Unit"]
+        elif "Section" in self.filtered_data.columns:
+            formatted_data["Department"] = self.filtered_data["Section"]
         else:
-            formatted_data["User"] = ""
+            formatted_data["Department"] = ""
         
         # Map Staff Name column - try to find staff-related fields
         if "Staff Name" in self.filtered_data.columns:
