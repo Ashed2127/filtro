@@ -13,7 +13,7 @@ a = Analysis(
     binaries=[],
     datas=[
         # Add the entire src directory as data files
-        ('src/processor.py', 'src'),
+        ('src', 'src'),
     ],
     hiddenimports=[
         'customtkinter',
