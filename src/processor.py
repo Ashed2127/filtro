@@ -514,8 +514,6 @@ class DataProcessor:
             category_order = ['Offer', 'Replacement', 'Zero Price']
             
             report_lines.append("")  # Add spacing before summary
-            report_lines.append("CATEGORY SUMMARY")
-            report_lines.append("-" * 40)
             
             for category in category_order:
                 if category in category_groups.groups:
@@ -526,10 +524,10 @@ class DataProcessor:
                     ).sum()
                     grand_total += total_amount
                     # Format: category name (left), count (middle), amount (right)
-                    report_lines.append(f"{str(category):<15} Count: {count:>3}  Total: {total_amount:>10.2f} Birr")
+                    report_lines.append(f"{str(category):<15} {count:>3}    {total_amount:>10.2f} Birr")
             
             report_lines.append("-" * 40)
-            report_lines.append(f"{'GRAND TOTAL':<15} {'':>12} {grand_total:>10.2f} Birr")
+            report_lines.append(f"{'TOTAL':<15} {'':>6} {grand_total:>10.2f} Birr")
         else:
             # Fallback: basic statistics
             report_lines.append(f"Total Records: {len(report_data)}")
