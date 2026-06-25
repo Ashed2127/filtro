@@ -262,7 +262,7 @@ class DataProcessor:
         
         category_summary = {}
         
-        for category in ['Offer', 'Replacement', 'Transfer', 'Bundle']:
+        for category in ['Offer', 'Replacement', 'Zero Price']:
             cat_data = self.filtered_data[self.filtered_data['Category'] == category]
             if len(cat_data) > 0:
                 # Calculate total amount for this category
@@ -285,7 +285,7 @@ class DataProcessor:
             
             # Calculate category summary
             category_summary = {}
-            for category in ['Offer', 'Replacement', 'Transfer', 'Bundle']:
+            for category in ['Offer', 'Replacement', 'Zero Price']:
                 cat_data = data[data['Category'] == category]
                 if len(cat_data) > 0:
                     total_amount = cat_data['Total Payment Amount'].apply(
@@ -510,14 +510,19 @@ class DataProcessor:
             category_groups = self.filtered_data.groupby(category_col)
             
             grand_total = 0
-            for category, group in category_groups:
-                count = len(group)
-                total_amount = group[amount_col].apply(
-                    lambda x: self._extract_numeric_amount(x)
-                ).sum()
-                grand_total += total_amount
-                # Format: category name (left), count (right), amount (right)
-                report_lines.append(f"{str(category):<15} {count:>6} {total_amount:>10.2f}")
+            # Order categories: Offer, Replacement, Zero Price
+            category_order = ['Offer', 'Replacement', 'Zero Price']
+            
+            for category in category_order:
+                if category in category_groups.groups:
+                    group = category_groups.get_group(category)
+                    count = len(group)
+                    total_amount = group[amount_col].apply(
+                        lambda x: self._extract_numeric_amount(x)
+                    ).sum()
+                    grand_total += total_amount
+                    # Format: category name (left), count (right), amount (right)
+                    report_lines.append(f"{str(category):<15} {count:>6} {total_amount:>10.2f}")
             
             report_lines.append("-" * 35)
             report_lines.append(f"{'total':<15} {'':>6} {grand_total:>10.2f}")
