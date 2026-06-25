@@ -175,12 +175,12 @@ class DataProcessor:
         # Categorization logic
         if amount == 85.0:
             return 'Offer'  # 85 birr transactions
-        elif amount == 100.0 and 'change subscriber sim card' in business_op:
-            return 'Replacement'  # 100 birr SIM card changes
-        elif amount == 0.0:
-            return 'Transfer'  # Zero price transactions
         elif amount == 100.0:
-            return 'Bundle'  # Other 100 birr transactions (potential bundles)
+            return 'Replacement'  # 100 birr transactions (all)
+        elif amount == 0.0 and 'change subscriber sim card' in business_op:
+            return 'Zero Price'  # Zero price with Change Subscriber SIM Card
+        elif amount == 0.0:
+            return 'Transfer'  # Other zero price transactions (shouldn't occur with new filtering)
         
         return 'Other'
     
