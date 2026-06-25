@@ -141,13 +141,8 @@ class DataProcessor:
         # For zero price transactions, also check Business Operation column
         zero_price_mask = filtered_by_status["CleanAmount"] == 0.00
         if "Business Operation" in filtered_by_status.columns:
-            # Include zero price transactions with specific business operations
-            business_operations_to_include = [
-                "Change Subscriber SIM Card",
-                "Create Customer", 
-                "Change Supplementary Offering"
-            ]
-            business_op_mask = filtered_by_status["Business Operation"].isin(business_operations_to_include)
+            # Include zero price transactions only with "Change Subscriber SIM Card" business operation
+            business_op_mask = filtered_by_status["Business Operation"].str.contains("Change Subscriber SIM Card", case=False, na=False)
             # Combine: either (zero price AND valid business op) OR (85/100 birr)
             final_mask = (
                 (zero_price_mask & business_op_mask) |
