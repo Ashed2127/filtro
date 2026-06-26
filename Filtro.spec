@@ -9,12 +9,9 @@ block_cipher = None
 
 a = Analysis(
     ['main.py'],
-    pathex=['.'],
+    pathex=['.', 'src'],
     binaries=[],
-    datas=[
-        # Add the entire src directory as data files
-        ('src', 'src'),
-    ],
+    datas=[],
     hiddenimports=[
         'customtkinter',
         'numpy',
@@ -22,8 +19,8 @@ a = Analysis(
         'openpyxl',
         'pillow',
         'tkinter',
-        'processor',
-        'app',
+        'src.app',
+        'src.processor',
     ],
     hookspath=[],
     hooksconfig={},
