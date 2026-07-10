@@ -24,16 +24,20 @@ class FiltroApp(ctk.CTk):
     def setup_window(self):
         """Configure main window properties."""
         self.title("Filtro - Excel Filter & Print Tool")
-        self.geometry("1000x800")
-        self.minsize(800, 600)
+        self.geometry("1000x900")
+        self.minsize(800, 700)
         ctk.set_appearance_mode("System")
         ctk.set_default_color_theme("blue")
     
     def setup_ui(self):
         """Build the user interface."""
-        # Main container
-        self.main_frame = ctk.CTkFrame(self)
-        self.main_frame.pack(fill="both", expand=True, padx=20, pady=20)
+        # Create a scrollable frame
+        self.scrollable_frame = ctk.CTkScrollableFrame(self, label_text="Filtro - Excel Filter & Print Tool")
+        self.scrollable_frame.pack(fill="both", expand=True, padx=10, pady=10)
+        
+        # Main container inside scrollable frame
+        self.main_frame = ctk.CTkFrame(self.scrollable_frame)
+        self.main_frame.pack(fill="both", expand=True, padx=10, pady=10)
         
         # File Selection Section
         self.file_frame = ctk.CTkFrame(self.main_frame)
@@ -191,7 +195,7 @@ class FiltroApp(ctk.CTk):
         )
         self.results_label.pack(anchor="w", padx=10, pady=(10, 5))
         
-        self.results_text = ctk.CTkTextbox(self.results_frame, scrollbar_button_color="gray", scrollbar_button_hover_color="darkgray")
+        self.results_text = ctk.CTkTextbox(self.results_frame, height=200, scrollbar_button_color="gray", scrollbar_button_hover_color="darkgray")
         self.results_text.pack(fill="both", expand=True, padx=10, pady=(5, 10))
         
         # Enable mouse wheel scrolling
