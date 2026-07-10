@@ -16,6 +16,7 @@ class FiltroApp(ctk.CTk):
         
         self.processor = DataProcessor()
         self.current_file = None
+        self.second_file = None
         
         self.setup_window()
         self.setup_ui()
@@ -55,6 +56,28 @@ class FiltroApp(ctk.CTk):
             width=100
         )
         self.browse_button.pack(anchor="e", padx=10, pady=(5, 10))
+        
+        # Second File Selection Section (for 2026... files)
+        self.file_frame2 = ctk.CTkFrame(self.main_frame)
+        self.file_frame2.pack(fill="x", pady=(0, 20))
+        
+        self.file_label2 = ctk.CTkLabel(
+            self.file_frame2,
+            text="Select Second Excel File (2026...):",
+            font=ctk.CTkFont(size=14, weight="bold")
+        )
+        self.file_label2.pack(anchor="w", padx=10, pady=(10, 5))
+        
+        self.file_path_entry2 = ctk.CTkEntry(self.file_frame2, placeholder_text="No second file selected")
+        self.file_path_entry2.pack(fill="x", padx=10, pady=5)
+        
+        self.browse_button2 = ctk.CTkButton(
+            self.file_frame2,
+            text="Browse",
+            command=self.browse_second_file,
+            width=100
+        )
+        self.browse_button2.pack(anchor="e", padx=10, pady=(5, 10))
         
         # Filter Options Section
         self.filter_frame = ctk.CTkFrame(self.main_frame)
@@ -147,6 +170,16 @@ class FiltroApp(ctk.CTk):
         )
         self.print_button.pack(side="left", padx=10, pady=10, expand=True, fill="x")
         
+        self.process_second_button = ctk.CTkButton(
+            self.button_frame,
+            text="Process Second File",
+            command=self.process_second_file,
+            height=40,
+            fg_color="#9B59B6",
+            hover_color="#8E44AD"
+        )
+        self.process_second_button.pack(side="left", padx=10, pady=10, expand=True, fill="x")
+        
         # Results Section
         self.results_frame = ctk.CTkFrame(self.main_frame)
         self.results_frame.pack(fill="both", expand=True, pady=(0, 10))
@@ -185,6 +218,18 @@ class FiltroApp(ctk.CTk):
             self.current_file = file_path
             self.file_path_entry.delete(0, tk.END)
             self.file_path_entry.insert(0, file_path)
+    
+    def browse_second_file(self):
+        """Open file dialog to select second Excel file (2026...)."""
+        file_path = filedialog.askopenfilename(
+            title="Select Second Excel File (2026...)",
+            filetypes=[("Excel files", "*.xlsx *.xls"), ("All files", "*.*")]
+        )
+        
+        if file_path:
+            self.second_file = file_path
+            self.file_path_entry2.delete(0, tk.END)
+            self.file_path_entry2.insert(0, file_path)
     
     def process_data(self):
         """Process the Excel file and display results."""
@@ -245,6 +290,70 @@ class FiltroApp(ctk.CTk):
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process data: {str(e)}")
+    
+    def process_second_file(self):
+        """Process the second Excel file (2026...): cut columns C and D, add filtered data, and prepare for printing."""
+        if not self.second_file:
+            messagebox.showerror("Error", "Please select a second Excel file.")
+            return
+        
+        if self.processor.filtered_data is None:
+            messagebox.showerror("Error", "Please process the first file first.")
+            return
+        
+        try:
+            # Load the second Excel file
+            second_df = pd.read_excel(self.second_file)
+            
+            # Cut columns C and D (3rd and 4th columns, 0-indexed as 2 and 3)
+            if len(second_df.columns) > 3:
+                # Drop columns C (index 2) and D (index 3)
+                columns_to_drop = [second_df.columns[2], second_df.columns[3]]
+                second_df = second_df.drop(columns=columns_to_drop)
+            
+            # Save the modified second file first
+            second_df.to_excel(self.second_file, index=False)
+            
+            # Get the filtered data from the first file in the right format
+            formatted_data = self.processor.format_for_report()
+            
+            # Load the modified second file back and append the filtered data
+            # Use openpyxl to append data to existing file
+            from openpyxl import load_workbook
+            
+            # Load the workbook
+            wb = load_workbook(self.second_file)
+            ws = wb.active
+            
+            # Find the next empty row
+            next_row = ws.max_row + 1
+            
+            # Get the column headers from the formatted data
+            headers = list(formatted_data.columns)
+            
+            # Write headers if this is the first time appending (check if row 1 has our headers)
+            header_row = 1
+            existing_headers = [ws.cell(row=header_row, column=col).value for col in range(1, len(headers) + 1)]
+            
+            # If headers don't match, write our headers
+            if existing_headers != headers:
+                for col, header in enumerate(headers, start=1):
+                    ws.cell(row=next_row, column=col, value=header)
+                next_row += 1
+            
+            # Write the data rows
+            for _, row in formatted_data.iterrows():
+                for col, value in enumerate(row, start=1):
+                    ws.cell(row=next_row, column=col, value=value)
+                next_row += 1
+            
+            # Save the workbook
+            wb.save(self.second_file)
+            
+            messagebox.showinfo("Success", f"Second file processed and saved to {self.second_file}. You can now add additional data before printing.")
+            
+        except Exception as e:
+            messagebox.showerror("Error", f"Failed to process second file: {str(e)}")
     
     def generate_report(self):
         """Generate a compact business report with transaction details and summary."""
@@ -310,6 +419,23 @@ class FiltroApp(ctk.CTk):
     
     def print_data(self):
         """Print the processed data to default printer (A5 format)."""
+        # If second file exists and has been processed, open it for printing
+        if self.second_file:
+            try:
+                if platform.system() == "Windows":
+                    os.startfile(self.second_file)
+                elif platform.system() == "Darwin":  # macOS
+                    os.system(f"open '{self.second_file}'")
+                else:  # Linux
+                    os.system(f"xdg-open '{self.second_file}'")
+                
+                messagebox.showinfo("Print", f"Opening {self.second_file} for printing. Please use A5 paper size settings.")
+                return
+            except Exception as e:
+                messagebox.showerror("Error", f"Failed to open second file for printing: {str(e)}")
+                return
+        
+        # Otherwise, print the filtered data
         if self.processor.filtered_data is None:
             messagebox.showerror("Error", "Please process data first.")
             return
