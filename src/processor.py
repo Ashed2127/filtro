@@ -26,12 +26,15 @@ class DataProcessor:
         try:
             self.is_real_time_format = self._is_real_time_file(file_path)
             
+            # Determine the appropriate engine based on file extension
+            engine = 'xlrd' if file_path.lower().endswith('.xls') else None
+            
             if self.is_real_time_format:
                 # Real Time format has header at row 10 (0-indexed)
-                self.data = pd.read_excel(file_path, header=10)
+                self.data = pd.read_excel(file_path, header=10, engine=engine)
             else:
                 # Standard format
-                self.data = pd.read_excel(file_path)
+                self.data = pd.read_excel(file_path, engine=engine)
             
             # Auto-detect business-relevant columns
             self._detect_business_columns()

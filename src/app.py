@@ -306,8 +306,11 @@ class FiltroApp(ctk.CTk):
             return
         
         try:
-            # Load the second Excel file
-            second_df = pd.read_excel(self.second_file)
+            # Load the second Excel file with appropriate engine
+            if self.second_file.lower().endswith('.xls'):
+                second_df = pd.read_excel(self.second_file, engine='xlrd')
+            else:
+                second_df = pd.read_excel(self.second_file)
             
             # Cut columns C and D (3rd and 4th columns, 0-indexed as 2 and 3)
             if len(second_df.columns) > 3:
