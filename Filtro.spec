@@ -17,6 +17,7 @@ a = Analysis(
         'numpy',
         'pandas',
         'openpyxl',
+        'xlrd',
         'pillow',
         'tkinter',
         'src.app',
