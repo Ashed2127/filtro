@@ -307,8 +307,14 @@ class FiltroApp(ctk.CTk):
         
         try:
             # Load the second Excel file with appropriate engine
+            # Convert .xls to .xlsx if needed for better compatibility
+            original_file = self.second_file
             if self.second_file.lower().endswith('.xls'):
+                # Read with xlrd
                 second_df = pd.read_excel(self.second_file, engine='xlrd')
+                # Convert to .xlsx format for processing
+                self.second_file = self.second_file.rsplit('.', 1)[0] + '.xlsx'
+                second_df.to_excel(self.second_file, index=False, engine='openpyxl')
             else:
                 second_df = pd.read_excel(self.second_file)
             
@@ -318,8 +324,8 @@ class FiltroApp(ctk.CTk):
                 columns_to_drop = [second_df.columns[2], second_df.columns[3]]
                 second_df = second_df.drop(columns=columns_to_drop)
             
-            # Save the modified second file first
-            second_df.to_excel(self.second_file, index=False)
+            # Save the modified second file first (now as .xlsx)
+            second_df.to_excel(self.second_file, index=False, engine='openpyxl')
             
             # Get the filtered data from the first file in the right format
             formatted_data = self.processor.format_for_report()
@@ -357,7 +363,15 @@ class FiltroApp(ctk.CTk):
             # Save the workbook
             wb.save(self.second_file)
             
-            messagebox.showinfo("Success", f"Second file processed and saved to {self.second_file}. You can now add additional data before printing.")
+            # Check if file was converted
+            conversion_note = ""
+            if original_file != self.second_file:
+                conversion_note = f" (converted from {os.path.basename(original_file)} to .xlsx format)"
+                # Update the UI to show the new file path
+                self.file_path_entry2.delete(0, tk.END)
+                self.file_path_entry2.insert(0, self.second_file)
+            
+            messagebox.showinfo("Success", f"Second file processed and saved to {self.second_file}{conversion_note}. You can now add additional data before printing.")
             
         except Exception as e:
             messagebox.showerror("Error", f"Failed to process second file: {str(e)}")
