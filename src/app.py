@@ -318,10 +318,10 @@ class FiltroApp(ctk.CTk):
             else:
                 second_df = pd.read_excel(self.second_file)
             
-            # Cut columns C and D (3rd and 4th columns, 0-indexed as 2 and 3)
-            if len(second_df.columns) > 3:
-                # Drop columns C (index 2) and D (index 3)
-                columns_to_drop = [second_df.columns[2], second_df.columns[3]]
+            # Cut columns C and E (3rd and 5th columns, 0-indexed as 2 and 4)
+            if len(second_df.columns) > 4:
+                # Drop columns C (index 2) and E (index 4)
+                columns_to_drop = [second_df.columns[2], second_df.columns[4]]
                 second_df = second_df.drop(columns=columns_to_drop)
             
             # Save the modified second file first (now as .xlsx)
